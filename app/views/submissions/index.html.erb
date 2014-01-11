@@ -1,0 +1,47 @@
+<h1>Listing submissions</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Student number</th>
+      <th>Last name</th>
+      <th>First name</th>
+      <th>Email</th>
+      <th>Week</th>
+      <th>Hours</th>
+      <% (1..@course.exercises_max).each do |e| %>
+        <th><%=e%></th>
+      <% end %>
+      <th>total</th>
+      <th>Comments</th>
+      <th>Identifier</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <tr>
+        <td><%= submission.student_number %></td>
+        <td><%= submission.last_name %></td>
+        <td><%= submission.first_name %></td>
+        <td><%= submission.email %></td>
+        <td><%= submission.week %></td>
+        <td><%= submission.hours %></td>
+        <% (1..@course.exercises_max).each do |e| %>
+            <td><%= t(submission.assignment(e)) %></td>
+        <% end %>
+        <td><%= submission.total %></td>
+        <td><%= submission.comments %></td>
+        <td><%= link_to submission.identifier, submission_path(submission.identifier) %></td>
+        <td><%= link_to 'Edit', edit_submission_path(submission.identifier) %></td>
+        <td><%= link_to 'Destroy', submission_path(submission.identifier), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Submission', new_submission_path %>

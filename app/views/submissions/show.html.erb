@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @submission.course%> submission for week <%= @submission.week %></h1>
+
+
+<h3>
+  <%= @submission.first_name %> <%= @submission.last_name %> (<%= @submission.student_number %>)
+</h3>
+
+<p>
+  <%= @submission.email %>
+</p>
+
+
+<p>
+  <strong>Link to this submission</strong>
+  <%= link_to "http://localhost:3000/submissions/"+@submission.identifier, submission_path(@submission.identifier) %>
+</p>
+
+<p>
+  <strong> <%= @submission.total%> exercises marked:</strong>
+</p>
+
+<table border="1">
+<tr>
+  <% (1..@submission.exercises_at_this_week).each do |e| %>
+      <td><%= e %></td>
+  <% end %>
+</tr>
+<tr>
+    <% (1..@submission.exercises_at_this_week).each do |e| %>
+        <td><%= t(@submission.assignment(e)) %></td>
+    <% end %>
+</tr>
+</table>
+
+<p>
+  <strong>Hours spend:</strong>
+  <%= @submission.hours %>
+</p>
+
+
+<p>
+  <strong>Comments:</strong>
+  <%= @submission.comments %>
+</p>
+
+
+<%= link_to 'Edit this submission', edit_submission_path(@submission.identifier) %>
+
+<br>
+
+<%= link_to 'Back', submissions_path %>

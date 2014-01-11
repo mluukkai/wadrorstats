@@ -1,0 +1,49 @@
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :term %><br>
+    <%= f.text_field :term %>
+  </div>
+  <div class="field">
+    <%= f.label :week1 %><br>
+    <%= f.number_field :week1 %>
+  </div>
+  <div class="field">
+    <%= f.label :week2 %><br>
+    <%= f.number_field :week2 %>
+  </div>
+  <div class="field">
+    <%= f.label :week3 %><br>
+    <%= f.number_field :week3 %>
+  </div>
+  <div class="field">
+    <%= f.label :week4 %><br>
+    <%= f.number_field :week4 %>
+  </div>
+  <div class="field">
+    <%= f.label :week5 %><br>
+    <%= f.number_field :week5 %>
+  </div>
+  <div class="field">
+    <%= f.label :week6 %><br>
+    <%= f.number_field :week6 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

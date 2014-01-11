@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @course.term %>
+</p>
+
+<p>
+  <strong>Week1:</strong>
+  <%= @course.week1 %>
+</p>
+
+<p>
+  <strong>Week2:</strong>
+  <%= @course.week2 %>
+</p>
+
+<p>
+  <strong>Week3:</strong>
+  <%= @course.week3 %>
+</p>
+
+<p>
+  <strong>Week4:</strong>
+  <%= @course.week4 %>
+</p>
+
+<p>
+  <strong>Week5:</strong>
+  <%= @course.week5 %>
+</p>
+
+<p>
+  <strong>Week6:</strong>
+  <%= @course.week6 %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>

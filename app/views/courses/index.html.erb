@@ -1,0 +1,41 @@
+<h1>Listing courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Term</th>
+      <th>Week1</th>
+      <th>Week2</th>
+      <th>Week3</th>
+      <th>Week4</th>
+      <th>Week5</th>
+      <th>Week6</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.term %></td>
+        <td><%= course.week1 %></td>
+        <td><%= course.week2 %></td>
+        <td><%= course.week3 %></td>
+        <td><%= course.week4 %></td>
+        <td><%= course.week5 %></td>
+        <td><%= course.week6 %></td>
+        <td><%= link_to 'Show', course %></td>
+        <td><%= link_to 'Edit', edit_course_path(course) %></td>
+        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course', new_course_path %>
