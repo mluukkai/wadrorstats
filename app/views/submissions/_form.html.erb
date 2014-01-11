@@ -45,6 +45,11 @@
     <%= f.text_field :email %>
   </div>
 
+  <div class="field">
+    <%= f.label 'github repository:' %><br>
+    <%= f.text_field :github, size:80 %>
+  </div>
+
   <%= f.hidden_field(:week, value:@submission.week) %>
   <div class="identifier">
     <%= f.hidden_field(:id, value:@submission.identifier) %>

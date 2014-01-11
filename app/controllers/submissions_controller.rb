@@ -14,12 +14,14 @@ class SubmissionsController < ApplicationController
   def new
     @course = Course.current
     @submission = Submission.new
-    @submission.week = 1
     @submission.course = Course.current
-    @submission.student_number = "012345678"
-    @submission.first_name = "Matti"
-    @submission.last_name = "Luukkainen"
-    @submission.email = "mluukkai@iki.fi"
+    @submission.week = Course.current.current_week
+
+    #@submission.week = 1
+    #@submission.student_number = "012345678"
+    #@submission.first_name = "Matti"
+    #@submission.last_name = "Luukkainen"
+    #@submission.email = "mluukkai@iki.fi"
   end
 
   def create
@@ -66,7 +68,7 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      allowed = :student_number, :last_name, :first_name, :week, :hours, :comments, :email
+      allowed = :student_number, :last_name, :first_name, :week, :hours, :comments, :email, :github
       (1..Course.current.exercises_max).each do |i|
         allowed << "a#{i}".to_s
       end

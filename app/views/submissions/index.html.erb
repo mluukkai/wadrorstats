@@ -14,6 +14,7 @@
       <% end %>
       <th>total</th>
       <th>Comments</th>
+      <th>Github</th>
       <th>Identifier</th>
       <th></th>
       <th></th>
@@ -34,6 +35,7 @@
         <% end %>
         <td><%= submission.total %></td>
         <td><%= submission.comments %></td>
+        <td><%= submission.github %></td>
         <td><%= link_to submission.identifier, submission_path(submission.identifier) %></td>
         <td><%= link_to 'Edit', edit_submission_path(submission.identifier) %></td>
         <td><%= link_to 'Destroy', submission_path(submission.identifier), method: :delete, data: { confirm: 'Are you sure?' } %></td>

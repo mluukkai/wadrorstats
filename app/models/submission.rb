@@ -11,6 +11,10 @@ class Submission < ActiveRecord::Base
                                       :less_than_or_equal_to => 50,
                                       :only_integer => true }
 
+  validates :github,
+            :format => { :with => /https:\/\/github.com\/.+\/.+/,
+                         :message => "copy/paste your repo address here from browser address line" }
+
   validates :student_number,
             :format => { :with => /\A0\d{8}\z/,
                          :message => "should start with 0 and be followed by 8 digits" }
