@@ -1,19 +1,16 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
-  # GET /submissions
-  # GET /submissions.json
+  before_filter :authenticate, :only => [:index]
+
   def index
     @course = Course.current
     @submissions = Submission.all
   end
 
-  # GET /submissions/1
-  # GET /submissions/1.json
   def show
   end
 
-  # GET /submissions/new
   def new
     @course = Course.current
     @submission = Submission.new
@@ -25,10 +22,6 @@ class SubmissionsController < ApplicationController
     @submission.email = "mluukkai@iki.fi"
   end
 
-  # GET /submissions/1/edit
-  def edit
-  end
-
   def create
     @submission = Submission.new(submission_params)
     @submission.generate_digest
@@ -36,7 +29,7 @@ class SubmissionsController < ApplicationController
 
     if @submission.save
       subject = "[WADROR] Exercise submission for week #{@submission.week}"
-      msg_body = "Link to your submission http://localhost:3000/submissions/#{@submission.identifier}"
+      msg_body = "Link to your submission #{request.protocol}#{request.host_with_port}/submissions/#{@submission.identifier}"
       begin
         NotificationMailer.email("mluukkai@iki.fi", @submission.email, msg_body, subject).deliver
       rescue
@@ -48,28 +41,21 @@ class SubmissionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /submissions/1
-  # PATCH/PUT /submissions/1.json
+  def edit
+    @submission.id = 0
+  end
+
   def update
-    respond_to do |format|
-      if @submission.update(submission_params)
-        format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+    if @submission.update(submission_params)
+      redirect_to submission_path(@submission.identifier), notice: 'Submission was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
-  # DELETE /submissions/1
-  # DELETE /submissions/1.json
   def destroy
     @submission.destroy
-    respond_to do |format|
-      format.html { redirect_to submissions_url }
-      format.json { head :no_content }
-    end
+    redirect_to submissions_url, root_path
   end
 
   private

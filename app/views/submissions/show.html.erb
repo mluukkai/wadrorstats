@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @submission.course%> submission for week <%= @submission.week %></h1>
+<h1><%= @submission.course%></h1>
 
+<h2>submission for week <%= @submission.week %></h2>
 
 <h3>
   <%= @submission.first_name %> <%= @submission.last_name %> (<%= @submission.student_number %>)
@@ -14,7 +15,7 @@
 
 <p>
   <strong>Link to this submission</strong>
-  <%= link_to "http://localhost:3000/submissions/"+@submission.identifier, submission_path(@submission.identifier) %>
+  <%= link_to "#{request.protocol}#{request.host_with_port}/submissions/"+@submission.identifier, submission_path(@submission.identifier) %>
 </p>
 
 <p>
@@ -50,4 +51,4 @@
 
 <br>
 
-<%= link_to 'Back', submissions_path %>
+<%= link_to 'Back to home', root_path %>

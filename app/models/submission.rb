@@ -3,8 +3,20 @@ require 'digest/sha1'
 class Submission < ActiveRecord::Base
   belongs_to :course
 
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_presence_of :email
+
+  validates_numericality_of :hours, { :greater_than_or_equal_to => 1,
+                                      :less_than_or_equal_to => 50,
+                                      :only_integer => true }
+
+  validates :student_number,
+            :format => { :with => /\A0\d{8}\z/,
+                         :message => "should start with 0 and be followed by 8 digits" }
+
   def generate_digest
-    self.identifier = Digest::SHA1.hexdigest "#{email}#{created_at}"
+    self.identifier = Digest::SHA1.hexdigest "#{email}#{Time.now}"
   end
 
   def assignment(n)

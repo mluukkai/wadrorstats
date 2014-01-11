@@ -1,6 +1,10 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
+  def current
+    redirect_to Course.current
+  end
+
   # GET /courses
   # GET /courses.json
   def index
@@ -69,6 +73,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :term, :week1, :week2, :week3, :week4, :week5, :week6)
+      params.require(:course).permit(:name, :term, :current_week, :week1, :week2, :week3, :week4, :week5, :week6)
     end
 end
