@@ -13,17 +13,14 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
-  # GET /courses/1
-  # GET /courses/1.json
   def show
+    @stats = @course.week_statistics.where("submissions>0").sort{ |x, y| y.week <=> x.week }
   end
 
-  # GET /courses/new
   def new
     @course = Course.new
   end
 
-  # GET /courses/1/edit
   def edit
   end
 
@@ -57,14 +54,8 @@ class CoursesController < ApplicationController
     end
   end
 
-  # DELETE /courses/1
-  # DELETE /courses/1.json
   def destroy
     @course.destroy
-    respond_to do |format|
-      format.html { redirect_to courses_url }
-      format.json { head :no_content }
-    end
   end
 
   private
