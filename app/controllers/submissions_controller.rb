@@ -17,11 +17,11 @@ class SubmissionsController < ApplicationController
     @submission.course = Course.current
     @submission.week = Course.current.current_week
 
-    @submission.week = 1
-    @submission.student_number = "012345678"
-    @submission.first_name = "Matti"
-    @submission.last_name = "Luukkainen"
-    @submission.email = "mluukkai@iki.fi"
+    #@submission.week = 1
+    #@submission.student_number = "012345678"
+    #@submission.first_name = "Matti"
+    #@submission.last_name = "Luukkainen"
+    #@submission.email = "mluukkai@iki.fi"
   end
 
   def create
@@ -33,7 +33,7 @@ class SubmissionsController < ApplicationController
       subject = "[WADROR] Exercise submission for week #{@submission.week}"
       msg_body = "Link to your submission #{request.protocol}#{request.host_with_port}/submissions/#{@submission.identifier}"
       begin
-        #NotificationMailer.email("mluukkai@iki.fi", @submission.email, msg_body, subject).deliver
+        NotificationMailer.email("mluukkai@iki.fi", @submission.email, msg_body, subject).deliver
       rescue
       end
 
