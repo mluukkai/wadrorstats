@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   has_many :submissions
+  has_many :week_statistics
 
   def self.current
     Course.last

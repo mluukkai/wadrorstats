@@ -17,11 +17,11 @@ class SubmissionsController < ApplicationController
     @submission.course = Course.current
     @submission.week = Course.current.current_week
 
-    #@submission.week = 1
-    #@submission.student_number = "012345678"
-    #@submission.first_name = "Matti"
-    #@submission.last_name = "Luukkainen"
-    #@submission.email = "mluukkai@iki.fi"
+    @submission.week = 1
+    @submission.student_number = "012345678"
+    @submission.first_name = "Matti"
+    @submission.last_name = "Luukkainen"
+    @submission.email = "mluukkai@iki.fi"
   end
 
   def create
@@ -33,9 +33,19 @@ class SubmissionsController < ApplicationController
       subject = "[WADROR] Exercise submission for week #{@submission.week}"
       msg_body = "Link to your submission #{request.protocol}#{request.host_with_port}/submissions/#{@submission.identifier}"
       begin
-        NotificationMailer.email("mluukkai@iki.fi", @submission.email, msg_body, subject).deliver
+        #NotificationMailer.email("mluukkai@iki.fi", @submission.email, msg_body, subject).deliver
       rescue
       end
+
+      stats = @submission.course.week_statistics.find_by(week:@submission.week)
+      stats.submissions += 1
+      stats.completed_exercises += @submission.total
+      stats.used_time += @submission.hours
+      times = stats.times[@submission.hours] || 0
+      stats.times[@submission.hours] = times+1
+      exercises = stats.exercises[@submission.total] || 0
+      stats.exercises[@submission.total] = exercises+1
+      stats.save
 
       redirect_to submission_path(@submission.identifier), notice: 'Submission was successfully created.'
     else

@@ -1,4 +1,6 @@
 Wadrorstats::Application.routes.draw do
+  resources :week_statistics
+
   resources :courses
 
   resources :configurations

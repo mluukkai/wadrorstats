@@ -1,0 +1,45 @@
+<%= form_for(@week_statistic) do |f| %>
+  <% if @week_statistic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@week_statistic.errors.count, "error") %> prohibited this week_statistic from being saved:</h2>
+
+      <ul>
+      <% @week_statistic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :week %><br>
+    <%= f.number_field :week %>
+  </div>
+  <div class="field">
+    <%= f.label :course_id %><br>
+    <%= f.number_field :course_id %>
+  </div>
+  <div class="field">
+    <%= f.label :submissions %><br>
+    <%= f.number_field :submissions %>
+  </div>
+  <div class="field">
+    <%= f.label :completed_exercises %><br>
+    <%= f.number_field :completed_exercises %>
+  </div>
+  <div class="field">
+    <%= f.label :used_time %><br>
+    <%= f.number_field :used_time %>
+  </div>
+  <div class="field">
+    <%= f.label :exercises %><br>
+    <%= f.text_area :exercises %>
+  </div>
+  <div class="field">
+    <%= f.label :times %><br>
+    <%= f.text_area :times %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

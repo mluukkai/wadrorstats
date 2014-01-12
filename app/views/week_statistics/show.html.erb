@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Week:</strong>
+  <%= @week_statistic.week %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @week_statistic.course_id %>
+</p>
+
+<p>
+  <strong>Submissions:</strong>
+  <%= @week_statistic.submissions %>
+</p>
+
+<p>
+  <strong>Completed exercises:</strong>
+  <%= @week_statistic.completed_exercises %>
+</p>
+
+<p>
+  <strong>Used time:</strong>
+  <%= @week_statistic.used_time %>
+</p>
+
+<p>
+  <strong>Exercises:</strong>
+  <%= @week_statistic.exercises %>
+</p>
+
+<p>
+  <strong>Times:</strong>
+  <%= @week_statistic.times %>
+</p>
+
+<%= link_to 'Edit', edit_week_statistic_path(@week_statistic) %> |
+<%= link_to 'Back', week_statistics_path %>

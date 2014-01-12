@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  week: 1
+  course_id: 1
+  submissions: 1
+  completed_exercises: 1
+  used_time: 1
+  exercises: MyText
+  times: MyText
+
+two:
+  week: 1
+  course_id: 1
+  submissions: 1
+  completed_exercises: 1
+  used_time: 1
+  exercises: MyText
+  times: MyText

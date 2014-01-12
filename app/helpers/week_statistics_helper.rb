@@ -1,0 +1,2 @@
+module WeekStatisticsHelper
+end

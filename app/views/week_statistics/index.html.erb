@@ -1,0 +1,39 @@
+<h1>Listing week_statistics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Week</th>
+      <th>Course</th>
+      <th>Submissions</th>
+      <th>Completed exercises</th>
+      <th>Used time</th>
+      <th>Exercises</th>
+      <th>Times</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @week_statistics.each do |week_statistic| %>
+      <tr>
+        <td><%= week_statistic.week %></td>
+        <td><%= week_statistic.course_id %></td>
+        <td><%= week_statistic.submissions %></td>
+        <td><%= week_statistic.completed_exercises %></td>
+        <td><%= week_statistic.used_time %></td>
+        <td><%= week_statistic.exercises %></td>
+        <td><%= week_statistic.times %></td>
+        <td><%= link_to 'Show', week_statistic %></td>
+        <td><%= link_to 'Edit', edit_week_statistic_path(week_statistic) %></td>
+        <td><%= link_to 'Destroy', week_statistic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Week statistic', new_week_statistic_path %>
