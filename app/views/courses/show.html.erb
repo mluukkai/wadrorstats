@@ -21,8 +21,8 @@
 
     <div>
         total submissions <%= stat.submissions %> <br>
-        used time in average <%= stat.average_time %> hours <br>
-        completed exercises in average <%= stat.average_exercises %> <br>
+        used time in average <%= number_with_precision(stat.average_time, precision:1) %> hours <br>
+        completed exercises in average <%= number_with_precision(stat.average_exercises, precision:1) %> <br>
     </div>
 
     <br>

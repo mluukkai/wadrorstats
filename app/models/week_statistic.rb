@@ -6,10 +6,10 @@ class WeekStatistic < ActiveRecord::Base
 
 
   def average_time
-    used_time/submissions
+    1.0*used_time/submissions
   end
 
   def average_exercises
-    completed_exercises/submissions
+    1.0*completed_exercises/submissions
   end
 end
