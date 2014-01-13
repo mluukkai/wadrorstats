@@ -4,11 +4,14 @@
   <title>Wadrorstats</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="page">
+  <%= yield %>
+</div>
 
 </body>
 </html>

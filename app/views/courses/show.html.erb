@@ -7,7 +7,7 @@
 
 <ul>
   <li>
-    <%= link_to "create a submission fow week #{@course.current_week}", new_submission_path  %>
+    <%= link_to "create a submission fow week #{@course.current_week}", new_submission_path %>
   </li>
   <li>
     <%= link_to "course page", 'https://github.com/mluukkai/WebPalvelinohjelmointi2014/wiki/Web-palvelinohjelmointi-Ruby-on-Rails' %>
@@ -16,49 +16,54 @@
 
 <h2>Statistics</h2>
 
-<% @stats.each do | stat | %>
+<% @stats.each do |stat| %>
     <h3>Week <%= stat.week %></h3>
 
     <div>
-        total submissions <%= stat.submissions %> <br>
-        used time in average <%= number_with_precision(stat.average_time, precision:1) %> hours <br>
-        completed exercises in average <%= number_with_precision(stat.average_exercises, precision:1) %> <br>
+      total submissions <%= stat.submissions %> <br>
+      used time in average <%= number_with_precision(stat.average_time, precision: 1) %> hours <br>
+      completed exercises in average <%= number_with_precision(stat.average_exercises, precision: 1) %> <br>
     </div>
 
-    <br>
+    <div class="stattable">
 
-    <div>
-    <t4>hours used:</t4>
+      <h4>hours used:</h4>
 
-    <table border="1">
-      <tr>
-        <td>hours</td>
+      <table border="1">
+        <tr>
+          <th>hours</th>
+          <% (0..stat.times.length-1).each do |t| %>
+              <th><%= t %></th>
+          <% end %>
+        </tr>
+        <td>students</td>
         <% (0..stat.times.length-1).each do |t| %>
-            <td><%= t %></td>
+            <td><%= stat.times[t] %></td>
         <% end %>
-      </tr>
-      <td>students</td>
-      <% (0..stat.times.length-1).each do |t| %>
-          <td><%= stat.times[t] %></td>
-      <% end %>
-      </tr>
-    </table>
-
-    <t4>exercises completed</t4>
-
-    <table border="1">
-      <tr>
-        <td>number</td>
-        <% (0..stat.exercises.length-1).each do |t| %>
-            <td><%= t %></td>
-        <% end %>
-      </tr>
-      <td>students</td>
-      <% (0..stat.exercises.length-1).each do |t| %>
-          <td><%= stat.exercises[t] %></td>
-      <% end %>
-      </tr>
-    </table>
+        </tr>
+      </table>
 
     </div>
+
+    <div class="stattable">
+
+      <h4>exercises completed</h4>
+
+      <table border="1">
+        <tr>
+          <th>number</th>
+          <% (0..stat.exercises.length-1).each do |t| %>
+              <th><%= t %></th>
+          <% end %>
+        </tr>
+        <td>students</td>
+        <% (0..stat.exercises.length-1).each do |t| %>
+            <td><%= stat.exercises[t] %></td>
+        <% end %>
+        </tr>
+      </table>
+
+    </div>
+
+
 <% end %>

@@ -28,7 +28,7 @@
 <table border="1">
 <tr>
   <% (1..@submission.exercises_at_this_week).each do |e| %>
-      <td><%= e %></td>
+      <th><%= e %></th>
   <% end %>
 </tr>
 <tr>
@@ -43,10 +43,11 @@
   <%= @submission.hours %>
 </p>
 
-
 <p>
   <strong>Comments:</strong>
-  <%= @submission.comments %>
+  <div class="comments">
+    <%= markdown @submission.comments %>
+  </div>
 </p>
 
 
