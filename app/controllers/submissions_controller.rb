@@ -41,10 +41,13 @@ class SubmissionsController < ApplicationController
       stats.submissions += 1
       stats.completed_exercises += @submission.total
       stats.used_time += @submission.hours
+
       times = stats.times[@submission.hours] || 0
       stats.times[@submission.hours] = times+1
+
       exercises = stats.exercises[@submission.total] || 0
       stats.exercises[@submission.total] = exercises+1
+
       stats.save
 
       redirect_to submission_path(@submission.identifier), notice: 'Submission was successfully created.'
@@ -58,7 +61,25 @@ class SubmissionsController < ApplicationController
   end
 
   def update
+    old_submission = Submission.find_by(identifier:params[:id])
+
     if @submission.update(submission_params)
+
+      stats = @submission.course.week_statistics.find_by(week:@submission.week)
+      stats.completed_exercises += @submission.total-old_submission.total
+      stats.used_time += @submission.hours-old_submission.total
+
+      times = stats.times[@submission.hours] || 0
+      stats.times[@submission.hours] = times + 1
+      stats.times[old_submission.hours] -= 1 if stats.times[old_submission.hours]
+      stats.times[old_submission.hours] = nil if stats.times[old_submission.hours] == 0
+
+      exercises = stats.exercises[@submission.total] || 0
+      stats.exercises[@submission.total] = exercises + 1
+      stats.exercises[old_submission.total] -= 1 if stats.exercises[old_submission.total]
+      stats.exercises[old_submission.total] = nil if stats.exercises[old_submission.total] == 0
+      stats.save
+
       redirect_to submission_path(@submission.identifier), notice: 'Submission was successfully updated.'
     else
       render action: 'edit'
