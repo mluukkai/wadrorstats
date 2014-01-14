@@ -55,12 +55,18 @@
     <%= f.hidden_field(:id, value:@submission.identifier) %>
   </div>
 
+  <%= f.label 'completed exercises:'%>
+  <br>
+  <div style="margin-bottom: 10px;">
+
   <% (1..@submission.course.exercises_at_week(@submission.week)).each do |e| %>
     <span class="exercise">
         <%= e %>
         <%= f.check_box "a#{e}".to_s %>
     </span>
   <% end %>
+
+  </div>
 
   <div class="field">
     <%= f.label :hours %><br>
