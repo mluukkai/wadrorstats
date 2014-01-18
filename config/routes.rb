@@ -7,6 +7,10 @@ Wadrorstats::Application.routes.draw do
 
   resources :submissions
 
+  get 'api/week_stats', to:'api#week_stats'
+
+  get 'courses/api/week_stats', to:'api#week_stats'
+
   root 'courses#current'
 
   # The priority is based upon order of creation: first created -> highest priority.
