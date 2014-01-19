@@ -19,6 +19,13 @@ class Submission < ActiveRecord::Base
             :format => { :with => /\A0\d{8}\z/,
                          :message => "should start with 0 and be followed by 8 digits" }
 
+  def self.new_with_digest(params)
+    submission = Submission.new(params)
+    submission.generate_digest
+    submission.course = Course.current
+    submission
+  end
+
   def generate_digest
     self.identifier = Digest::SHA1.hexdigest "#{email}#{Time.now}"
   end

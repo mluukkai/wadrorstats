@@ -1,7 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
-
-  before_filter :authenticate, :only => [:index]
+  before_action :authenticate, :only => [:index]
 
   def index
     @course = Course.current
@@ -13,42 +12,16 @@ class SubmissionsController < ApplicationController
 
   def new
     @course = Course.current
-    @submission = Submission.new
-    @submission.course = Course.current
-    @submission.week = Course.current.current_week
-
-    #@submission.week = 1
-    #@submission.student_number = "012345678"
-    #@submission.first_name = "Matti"
-    #@submission.last_name = "Luukkainen"
-    #@submission.email = "mluukkai@iki.fi"
+    @submission = Submission.new course:Course.current, week:Course.current.current_week
+    if_in_development_prefill_fields_of @submission
   end
 
   def create
-    @submission = Submission.new(submission_params)
-    @submission.generate_digest
-    @submission.course = Course.current
+    @submission = Submission.new_with_digest(submission_params)
 
     if @submission.save
-      subject = "[WADROR] Exercise submission for week #{@submission.week}"
-      msg_body = "Link to your submission #{request.protocol}#{request.host_with_port}/submissions/#{@submission.identifier}"
-      begin
-        NotificationMailer.email("mluukkai@iki.fi", @submission.email, msg_body, subject).deliver
-      rescue
-      end
-
-      stats = @submission.course.week_statistics.find_by(week:@submission.week)
-      stats.submissions += 1
-      stats.completed_exercises += @submission.total
-      stats.used_time += @submission.hours
-
-      times = stats.times[@submission.hours] || 0
-      stats.times[@submission.hours] = times+1
-
-      exercises = stats.exercises[@submission.total] || 0
-      stats.exercises[@submission.total] = exercises+1
-
-      stats.save
+      send_email(@submission)
+      Course.current.take_into_account_in_stats(@submission)
 
       redirect_to submission_path(@submission.identifier), notice: 'Submission was successfully created.'
     else
@@ -64,21 +37,7 @@ class SubmissionsController < ApplicationController
     old_submission = Submission.find_by(identifier:params[:id])
 
     if @submission.update(submission_params)
-
-      stats = @submission.course.week_statistics.find_by(week:@submission.week)
-      stats.completed_exercises += @submission.total-old_submission.total
-      stats.used_time += @submission.hours-old_submission.total
-
-      times = stats.times[@submission.hours] || 0
-      stats.times[@submission.hours] = times + 1
-      stats.times[old_submission.hours] -= 1 if stats.times[old_submission.hours]
-      stats.times[old_submission.hours] = nil if stats.times[old_submission.hours] == 0
-
-      exercises = stats.exercises[@submission.total] || 0
-      stats.exercises[@submission.total] = exercises + 1
-      stats.exercises[old_submission.total] -= 1 if stats.exercises[old_submission.total]
-      stats.exercises[old_submission.total] = nil if stats.exercises[old_submission.total] == 0
-      stats.save
+      Course.current.update_stats_with(@submission, old_submission)
 
       redirect_to submission_path(@submission.identifier), notice: 'Submission was successfully updated.'
     else
@@ -105,4 +64,22 @@ class SubmissionsController < ApplicationController
       end
       params.require(:submission).permit(allowed)
     end
+
+  def send_email(submission)
+    subject = "[WADROR] Exercise submission for week #{submission.week}"
+    msg_body = "Link to your submission #{request.protocol}#{request.host_with_port}/submissions/#{submission.identifier}"
+    begin
+      NotificationMailer.email("mluukkai@iki.fi", submission.email, msg_body, subject).deliver unless Rails.env == 'development'
+    rescue
+    end
+  end
+
+  def if_in_development_prefill_fields_of(submission)
+    if Rails.env=='development'
+      submission.student_number = "012345678"
+      submission.first_name = "Matti"
+      submission.last_name = "Luukkainen"
+      submission.email = "mluukkai@iki.fi"
+    end
+  end
 end
