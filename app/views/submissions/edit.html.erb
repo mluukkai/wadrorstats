@@ -1,6 +1,7 @@
-<h1><%= @course%></h1>
+<div class="header">
+  <h1><%= @submission.course%></h1>
 
-<h2><%= @course%> submission for week <%= @submission.week %></h2>
-
+  <h2>edit your submission for week <%= @submission.week %></h2>
+</div>
 <%= render 'form' %>
 

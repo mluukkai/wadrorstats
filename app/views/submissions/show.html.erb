@@ -53,7 +53,9 @@
 </p>
 
 
-<%= link_to 'Edit this submission', edit_submission_path(@submission.identifier) %>
+<% unless @submission.week<Course.current.current_week  %>
+    <%= link_to 'Edit this submission', edit_submission_path(@submission.identifier) %>
+<% end %>
 
 <br>
 

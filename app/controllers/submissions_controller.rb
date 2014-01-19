@@ -31,6 +31,10 @@ class SubmissionsController < ApplicationController
 
   def edit
     @submission.id = 0
+    if @submission.week<Course.current.current_week
+      redirect_to submission_path(@submission.identifier), notice: 'Submission can not be updated.'
+    else
+    end
   end
 
   def update
