@@ -26,6 +26,15 @@ class Submission < ActiveRecord::Base
     submission
   end
 
+  def prefill_fields_if_in_development
+    return unless Rails.env.development?
+
+    self.student_number = "012345678"
+    self.first_name = "Matti"
+    self.last_name = "Luukkainen"
+    self.email = "mluukkai@iki.fi"
+  end
+
   def generate_digest
     self.identifier = Digest::SHA1.hexdigest "#{email}#{Time.now}"
   end

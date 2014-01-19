@@ -13,7 +13,7 @@ class SubmissionsController < ApplicationController
   def new
     @course = Course.current
     @submission = Submission.new course:Course.current, week:Course.current.current_week
-    if_in_development_prefill_fields_of @submission
+    @submission.prefill_fields_if_in_development
   end
 
   def create
@@ -73,13 +73,13 @@ class SubmissionsController < ApplicationController
     subject = "[WADROR] Exercise submission for week #{submission.week}"
     msg_body = "Link to your submission #{request.protocol}#{request.host_with_port}/submissions/#{submission.identifier}"
     begin
-      NotificationMailer.email("mluukkai@iki.fi", submission.email, msg_body, subject).deliver unless Rails.env == 'development'
+      NotificationMailer.email("mluukkai@iki.fi", submission.email, msg_body, subject).deliver unless Rails.env.development?
     rescue
     end
   end
 
   def if_in_development_prefill_fields_of(submission)
-    if Rails.env=='development'
+    if Rails.env.development?
       submission.student_number = "012345678"
       submission.first_name = "Matti"
       submission.last_name = "Luukkainen"
