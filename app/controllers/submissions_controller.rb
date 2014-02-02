@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
 
   def index
     @course = Course.current
-    @submissions = Submission.all
+    @submissions = Submission.order(updated_at: :desc)
   end
 
   def show
