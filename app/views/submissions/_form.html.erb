@@ -1,5 +1,15 @@
 <script>
     $( document ).ready( function(){
+        $('#toggle').click(function(e) {
+            console.log("täällä");
+            $(".exercise input").each(function(i, s) {
+                if ( $(s).prop('type')=="checkbox" ) {
+                    $(s).prop('checked', true);
+                }
+            });
+            e.preventDefault();
+        });
+
         var action = $('form')[0]['action'];
         var ending = action.substring(action.length-12,action.length);
 
@@ -65,7 +75,11 @@
         <%= f.check_box "a#{e}".to_s %>
     </span>
   <% end %>
-
+    <span>
+      <button id="toggle">
+        mark all
+      </button>
+    </span>
   </div>
 
   <div class="field">
