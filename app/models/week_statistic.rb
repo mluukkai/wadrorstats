@@ -14,7 +14,7 @@ class WeekStatistic < ActiveRecord::Base
 
   def update_with(new_submission, old_submission)
     self.completed_exercises += new_submission.total-old_submission.total
-    self.used_time += new_submission.hours-old_submission.total
+    self.used_time += new_submission.hours-old_submission.hours
 
     increase_counts_with new_submission
     decrease_counts_with old_submission
