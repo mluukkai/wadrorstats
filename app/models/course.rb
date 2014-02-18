@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+  after_initialize :init
   has_many :submissions
   has_many :week_statistics
 
@@ -30,4 +31,16 @@ class Course < ActiveRecord::Base
   def exercises_max
     (1..6).map{ |w| exercises_at_week(w) }.sort.last
   end
+
+  private
+
+    def init
+      self.week1 ||= 1
+      self.week2 ||= 2
+      self.week3 ||= 3
+      self.week4 ||= 4
+      self.week5 ||= 5
+      self.week6 ||= 6
+      self.current_week ||= 1
+    end
 end
