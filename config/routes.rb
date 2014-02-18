@@ -1,7 +1,11 @@
 Wadrorstats::Application.routes.draw do
   resources :week_statistics
 
-  resources :courses
+  resources :courses do
+    member do
+      get 'submissions'
+    end
+  end
 
   resources :configurations
 

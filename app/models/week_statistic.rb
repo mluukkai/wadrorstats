@@ -1,4 +1,5 @@
 class WeekStatistic < ActiveRecord::Base
+  after_initialize :init
   belongs_to :course
 
   serialize :exercises
@@ -43,4 +44,14 @@ class WeekStatistic < ActiveRecord::Base
   def average_exercises
     1.0*completed_exercises/submissions
   end
+
+  private
+
+    def init
+      self.submissions ||= 0
+      self.completed_exercises ||= 0
+      self.used_time ||= 0
+      self.times ||= {}
+      self.exercises ||= {}
+    end
 end
