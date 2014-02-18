@@ -9,7 +9,11 @@ Wadrorstats::Application.routes.draw do
 
   resources :configurations
 
-  resources :submissions
+  resources :submissions do
+    collection do
+      get 'public'
+    end  
+  end 
 
   get 'api/week_stats', to:'api#week_stats'
 

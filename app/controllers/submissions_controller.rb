@@ -7,6 +7,10 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.order(updated_at: :desc)
   end
 
+  def public
+    @submissions = Submission.where( course_id:Course.current.id).order(updated_at: :desc)
+  end
+
   def show
   end
 

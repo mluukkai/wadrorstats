@@ -3,7 +3,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 <script type="text/javascript">
   function SubmissionListController($scope, $http) {
-    $http.get('/submissions.json').success( function(data, status, headers, config) {
+    $http.get('/submissions/public.json').success( function(data, status, headers, config) {
       $scope.submissions = data;
       $scope.order = 'week'
     });
@@ -19,7 +19,6 @@
         <tr>
           <th>Studentnumber</th>
           <th>Week</th>
-          <th>Points</th>
           <th>Hours spent</th>
           <th>Done</th>
           <th>Total Exercises</th>
@@ -29,7 +28,6 @@
         <tr ng-repeat="submission in submissions | orderBy:order | filter:search">
         <td>{{submission.student_number}}</td>
         <td>{{submission.week}}</td>
-        <td>{{submission.points}}</td>
         <td>{{submission.hours}}</td>
         <td>{{submission.total}}</td>
         <td>{{submission.exercises_at_this_week}}</td>
