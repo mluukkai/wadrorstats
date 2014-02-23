@@ -3,6 +3,8 @@ class Course < ActiveRecord::Base
   has_many :submissions
   has_many :week_statistics
 
+  serialize :weeks
+
   def self.current
     Course.last
   end
@@ -24,8 +26,7 @@ class Course < ActiveRecord::Base
   end
 
   def exercises_at_week(week)
-    method = "week#{week}".to_s
-    self.send(method)
+    weeks(week-1)
   end
 
   def exercises_max
@@ -35,12 +36,7 @@ class Course < ActiveRecord::Base
   private
 
     def init
-      self.week1 ||= 1
-      self.week2 ||= 2
-      self.week3 ||= 3
-      self.week4 ||= 4
-      self.week5 ||= 5
-      self.week6 ||= 6
+      self.weeks ||= [1,2,3,4,5,6]
       self.current_week ||= 1
     end
 end
