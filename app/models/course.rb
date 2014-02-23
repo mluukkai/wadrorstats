@@ -45,7 +45,7 @@ class Course < ActiveRecord::Base
   end
 
   def exercises_at_week(week)
-    weeks(week-1)
+    weeks[week-1]
   end
 
   def exercises_max
@@ -55,7 +55,7 @@ class Course < ActiveRecord::Base
   private
 
     def init
-      self.weeks ||= [1,2,3,4,5,6]
+      self.weeks ||= [0,0,0,0,0,0]
       self.current_week ||= 1
     end
 end
