@@ -25,6 +25,25 @@ class Course < ActiveRecord::Base
     "#{name} #{term}"
   end
 
+  def week1
+    weeks[0]
+  end
+  def week2
+    weeks[1]
+  end
+  def week3
+    weeks[2]
+  end
+  def week4
+    weeks[3]
+  end
+  def week5
+    weeks[4]
+  end
+  def week6
+    weeks[5]
+  end
+
   def exercises_at_week(week)
     weeks(week-1)
   end
