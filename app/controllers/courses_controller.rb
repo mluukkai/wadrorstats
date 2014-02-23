@@ -34,6 +34,9 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+        @course.weeks.each_with_index do |v,i|
+          @course.week_statistics.create(week: i+1, exercises: {}, times: {})
+        end
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render action: 'show', status: :created, location: @course }
       else
