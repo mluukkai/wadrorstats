@@ -34,6 +34,9 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+        @course.weeks.each_with_index do |v,i|
+          @course.week_statistics.create(week: i+1, exercises: {}, times: {})
+        end
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render action: 'show', status: :created, location: @course }
       else
@@ -69,6 +72,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :term, :current_week, :week1, :week2, :week3, :week4, :week5, :week6)
+      params.require(:course).permit(:name, :term, :current_week, :weeks)
     end
 end

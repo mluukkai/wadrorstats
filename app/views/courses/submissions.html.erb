@@ -1,6 +1,5 @@
 <h1>List submissions</h1>
 
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 <script type="text/javascript">
   function SubmissionListController($scope, $http) {
     $http.get('/submissions/public.json').success( function(data, status, headers, config) {
@@ -13,7 +12,7 @@
   }
 </script>
 <div ng-app ng-controller="SubmissionListController">
-  search: <input ng-model="search.student_number" />
+  Studentnumber: <input ng-model="search.student_number" />
     <table id="submissions-table">
       <thead>
         <tr>

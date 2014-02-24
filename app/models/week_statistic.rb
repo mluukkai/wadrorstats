@@ -51,7 +51,5 @@ class WeekStatistic < ActiveRecord::Base
       self.submissions ||= 0
       self.completed_exercises ||= 0
       self.used_time ||= 0
-      self.times ||= {}
-      self.exercises ||= {}
     end
 end

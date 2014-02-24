@@ -11,21 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140112151615) do
+ActiveRecord::Schema.define(version: 20140223080936) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
     t.string   "term"
-    t.integer  "week1"
-    t.integer  "week2"
-    t.integer  "week3"
-    t.integer  "week4"
-    t.integer  "week5"
-    t.integer  "week6"
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "current_week"
+    t.text     "weeks"
   end
 
   create_table "submissions", force: true do |t|

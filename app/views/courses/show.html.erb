@@ -1,5 +1,4 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 <script type="text/javascript">
     google.load("visualization", "1", {packages: ["corechart"]});
 
@@ -49,7 +48,7 @@
   <ul>
     <% if false %>
     <li>
-      <%= link_to "create a submission fow week #{@course.current_week}", new_submission_path %>
+      <%= link_to "create a submission for week #{@course.current_week}", new_submission_path %>
     </li>
     <% end %>
     <li>
