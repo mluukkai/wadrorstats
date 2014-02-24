@@ -47,9 +47,11 @@
   </div>
 
   <ul>
+    <% if @course.current_week<7 %>
     <li>
       <%= link_to "create a submission fow week #{@course.current_week}", new_submission_path %>
     </li>
+    <% end %>
     <li>
       <%= link_to "course page", 'https://github.com/mluukkai/WebPalvelinohjelmointi2014/wiki/Web-palvelinohjelmointi-Ruby-on-Rails' %>
     </li>
