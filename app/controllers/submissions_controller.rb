@@ -21,7 +21,7 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = Submission.new_with_digest(submission_params)
+    #@submission = Submission.new_with_digest(submission_params)
 
     if @submission.save
       send_email(@submission)
