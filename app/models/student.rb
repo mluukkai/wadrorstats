@@ -13,6 +13,16 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def total_at_week(w)
+    s = submissions.where(week:w).first
+    return 0 if s.nil?
+    s.total
+  end
+
+  def total
+    (1..6).inject(0){ |sum, n| sum+total_at_week(n) }
+  end
+
   private
 
   def init

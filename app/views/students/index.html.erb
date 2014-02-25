@@ -1,14 +1,17 @@
 <h1>Listing students</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Student number</th>
       <th>Last name</th>
       <th>First name</th>
+      <th>Subnro</th>
+      <th>Submissions</th>
+      <% (1..6).each do |week| %>
+          <td> <%= week %> </td>
+      <% end %>
       <th>Total</th>
-      <th>Weeks</th>
-      <th>Submission</th>
     </tr>
   </thead>
 
@@ -18,10 +21,12 @@
         <td><%= link_to student.student_number, student %></td>
         <td><%= student.last_name %></td>
         <td><%= student.first_name %></td>
-        <td><%= student.total %></td>
-        <td><%= student.weeks %></td>
         <td><%= student.submissions.size %></td>
         <td><%= student.submissions.map(&:week).sort %></td>
+        <% (1..6).each do |week| %>
+            <td> <%= student.total_at_week(week) %> </td>
+        <% end %>
+        <td><%= student.total %></td>
         <td>
           <strong>
             <%= "DUPLICATE" if student.submissions.map(&:week).sort!=student.submissions.map(&:week).uniq.sort %>
