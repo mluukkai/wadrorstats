@@ -20,6 +20,13 @@ class Submission < ActiveRecord::Base
             :format => { :with => /\A0\d{8}\z/,
                          :message => "should start with 0 and be followed by 8 digits" }
 
+  def self.attach_to_students
+    Submission.all.each do |sub|
+      student = Student.find_by student_number:sub.student_number
+      student.submissions << sub unless sub.student
+    end
+  end
+
   def self.new_with_digest(params)
     submission = Submission.new(params)
     submission.generate_digest

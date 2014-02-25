@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Student number:</strong>
-  <%= @student.student_number %>
-</p>
+<h3>
+  <%= @student.first_name %> <%= @student.last_name %> (<%= @student.student_number %>)
+</h3>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @student.last_name %>
-</p>
+<h3>submissions</h3>
 
-<p>
-  <strong>First name:</strong>
-  <%= @student.first_name %>
-</p>
+<ul>
+  <% @student.submissions.each do |submission| %>
+    <li>
+      week <%= link_to submission.week, submission_path(submission.identifier) %>
+      marked <%= submission.total %>
+    </li>
+  <% end %>
+</ul>
 
 <p>
   <strong>Total:</strong>

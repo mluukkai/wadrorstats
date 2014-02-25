@@ -8,23 +8,25 @@
       <th>First name</th>
       <th>Total</th>
       <th>Weeks</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Submission</th>
     </tr>
   </thead>
 
   <tbody>
     <% @students.each do |student| %>
       <tr>
-        <td><%= student.student_number %></td>
+        <td><%= link_to student.student_number, student %></td>
         <td><%= student.last_name %></td>
         <td><%= student.first_name %></td>
         <td><%= student.total %></td>
         <td><%= student.weeks %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= student.submissions.size %></td>
+        <td><%= student.submissions.map(&:week).sort %></td>
+        <td>
+          <strong>
+            <%= "DUPLICATE" if student.submissions.map(&:week).sort!=student.submissions.map(&:week).uniq.sort %>
+          </strong>
+         </td>
       </tr>
     <% end %>
   </tbody>
