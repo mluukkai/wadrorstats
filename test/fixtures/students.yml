@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_number: MyString
+  last_name: MyString
+  first_name: MyString
+  total: 1
+  weeks: MyString
+
+two:
+  student_number: MyString
+  last_name: MyString
+  first_name: MyString
+  total: 1
+  weeks: MyString

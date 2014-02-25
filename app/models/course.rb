@@ -45,7 +45,7 @@ class Course < ActiveRecord::Base
   end
 
   def exercises_at_week(week)
-    weeks[week-1]
+    weeks[week-1].to_i
   end
 
   def exercises_max
