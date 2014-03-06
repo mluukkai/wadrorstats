@@ -46,13 +46,13 @@
   </div>
 
   <ul>
-    <% if false %>
+    <% if week<7 %>
     <li>
       <%= link_to "create a submission for week #{@course.current_week}", new_submission_path %>
     </li>
     <% end %>
     <li>
-      <%= link_to "course page", 'https://github.com/mluukkai/WebPalvelinohjelmointi2014/wiki/Web-palvelinohjelmointi-Ruby-on-Rails' %>
+      <%= link_to "course page", 'https://github.com/mluukkai/ohtu2014/wiki/Ohjelmistotuotanto-kev%C3%A4t-2014' %>
     </li>
     <li>
       <%= link_to 'See submission amount', submissions_course_path(@course) %>
