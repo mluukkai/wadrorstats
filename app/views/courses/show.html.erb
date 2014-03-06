@@ -46,7 +46,7 @@
   </div>
 
   <ul>
-    <% if @course.current_week<7 %>
+    <% if @course.current_week<8 %>
     <li>
       <%= link_to "create a submission for week #{@course.current_week}", new_submission_path %>
     </li>
