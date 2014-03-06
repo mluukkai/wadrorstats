@@ -52,7 +52,7 @@
     </li>
     <% end %>
     <li>
-      <%= link_to "course page", 'https://github.com/mluukkai/ohtu2014/wiki/Ohjelmistotuotanto-kev%C3%A4t-2014' %>
+      <%= link_to "course page", @course.link %>
     </li>
     <li>
       <%= link_to 'See submission amount', submissions_course_path(@course) %>
