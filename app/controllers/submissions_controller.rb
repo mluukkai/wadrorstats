@@ -74,7 +74,7 @@ class SubmissionsController < ApplicationController
     end
 
   def send_email(submission)
-    subject = "[WADROR] Exercise submission for week #{submission.week}"
+    subject = "[OhTu] Exercise submission for week #{submission.week}"
     msg_body = "Link to your submission #{request.protocol}#{request.host_with_port}/submissions/#{submission.identifier}"
     begin
       NotificationMailer.email("mluukkai@iki.fi", submission.email, msg_body, subject).deliver unless Rails.env.development?
