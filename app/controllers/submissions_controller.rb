@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, :only => [:index]
+  before_action :authenticate, :only => [:index, :edit, :update, :destroy]
 
   def index
     @course = Course.current
