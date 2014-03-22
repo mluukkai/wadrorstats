@@ -1,4 +1,6 @@
 Wadrorstats::Application.routes.draw do
+  resources :projects
+
   resources :students
 
   resources :week_statistics
