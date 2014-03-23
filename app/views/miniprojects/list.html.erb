@@ -1,0 +1,13 @@
+<h1>Miniprojects</h1>
+
+<table>
+
+  <tbody>
+    <% @miniprojects.each do |miniproject| %>
+      <tr>
+        <td><%= link_to miniproject.name, miniproject_path(miniproject.identifier) %></td>
+        <td><%= link_to miniproject.github, miniproject.github %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

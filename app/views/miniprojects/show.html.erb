@@ -1,0 +1,121 @@
+<script>
+    $( document ).ready( function(){
+        var action = $('form')[0]['action'];
+        var ending = action.substring(action.length-14,action.length);
+        if ( ending != "/miniprojects") {
+            var identifier = $('.identifier input')[0]['value'];
+            console.log(identifier)
+            var new_action = action.substring(0, action.length-1)+identifier;
+            $('form')[0]['action'] = new_action;
+        }
+    });
+
+    function MiniprojectController($scope, $http) {
+    	$http.get('/miniprojects/<%=@miniproject.identifier%>.json').success( function(data, status, headers, config) {
+      		$scope.participants = data.participants;
+    	});
+
+    	$scope.createParticipant = function() {
+    		$scope.participant.authenticity_token = "<%= form_authenticity_token %>"
+    		$http.post('/participants', $scope.participant).success( function(data, status, headers, config) {
+    			console.log(data);
+      			$scope.participants.push($scope.participant);
+    			$scope.participant = { miniproject_id:<%=@miniproject.id%> }
+    		});
+    	}
+
+		$scope.participant = { miniproject_id:<%=@miniproject.id%>}
+		//$scope.participant.first_name = "Mikko";
+		//$scope.participant.last_name = "Pekkala";
+		//$scope.participant.student_number = "011111111";
+    	$scope.formVisible = false;
+    	$scope.student_number = /0\d{8}$/;
+  	}
+</script>
+
+<div class="header">
+
+  <h1>
+    <%= Course.current.name %>
+    <%= Course.current.term %>
+  </h1>
+
+</div>
+
+<p id="notice"><%= notice %></p>
+
+
+<h2>
+  <%= @miniproject.name %>
+</h2>
+
+<% if @miniproject.github.nil? or @miniproject.errors.any? %>
+  <h4>Add the github url</h4>
+	<%= form_for(@miniproject) do |f| %>
+	    <% if @miniproject.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@miniproject.errors.count, "error") %> prohibited this miniproject from being saved:</h2>
+
+	      <ul>
+	      <% @miniproject.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	<% end %>
+
+    <div class="field">
+    	<%= f.text_field :github %>
+  	</div>
+    <div class="identifier">
+      <%= f.hidden_field(:id, value:@miniproject.identifier) %>
+    </div>
+  	<div class="actions">
+    	<%= f.submit "Save github url"%>
+  	</div>
+  <% end %>
+
+<% else %>
+  <%= link_to @miniproject.github, @miniproject.github %>
+<% end %>
+
+<div ng-app ng-controller="MiniprojectController">
+	<h4 ng-show="participants.length>0">Participants</h4>
+
+ 	<ul>
+ 		<li ng-repeat="p in participants">
+ 			{{p.first_name}} {{p.last_name}}
+ 		</li>
+  	</ul>
+
+  	<h4 ng-click="formVisible=!formVisible">Add a participant</h4>
+
+  	<form ng-show="formVisible" name="form">
+  	    <table>
+  	    	<tr>
+  	    		<td>first name</td>
+  	    		<td><input ng-model="participant.first_name" required></td>
+  	    	</tr>
+  	    	<tr>
+  	    		<td>last name</td>
+  	    		<td><input ng-model="participant.last_name" required></td>
+  	    	</tr>
+  	      	<tr>
+  	    		<td>student number&nbsp;&nbsp;</td>
+  	    		<td>
+  	    			<input type="text" name="number" ng-model="participant.student_number" required ng-pattern="student_number">
+  	    		</td>
+  	    		<td ng-show="form.number.$error.pattern">
+    				<em>With leading zero!</em>
+  	    		</td>
+  	    	</tr>	
+  	    </table>
+
+  	    <button ng-click="createParticipant()" ng-disabled="form.$invalid">Add a participant</button>
+
+  	</form>
+
+</div>
+
+
+

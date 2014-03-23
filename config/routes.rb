@@ -1,4 +1,10 @@
 Wadrorstats::Application.routes.draw do
+  resources :miniprojects do
+    collection do
+      get 'list'
+    end
+   end  
+
   resources :projects
 
   resources :students
@@ -18,6 +24,8 @@ Wadrorstats::Application.routes.draw do
       get 'public'
     end  
   end 
+
+  post '/participants', to:'participants#create'
 
   get 'api/week_stats', to:'api#week_stats'
 

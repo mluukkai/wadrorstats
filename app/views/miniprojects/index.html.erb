@@ -1,0 +1,32 @@
+<div class="header">
+
+  <h1>
+    <%= Course.current.name %>
+    <%= Course.current.term %>
+  </h1>
+
+</div>
+
+<h2>Miniproject groups</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>group name</th>
+      <th>repositorion</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @miniprojects.each do |miniproject| %>
+      <tr>
+        <td><%= miniproject.name %></td>
+        <td><%= link_to miniproject.github, miniproject.github %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Create a new miniproject group', new_miniproject_path, class:"btn btn-info" %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313112359) do
+ActiveRecord::Schema.define(version: 20140322134606) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -23,6 +23,25 @@ ActiveRecord::Schema.define(version: 20140313112359) do
     t.text     "weeks"
     t.string   "link"
     t.string   "title"
+    t.string   "acronyme"
+  end
+
+  create_table "miniprojects", force: true do |t|
+    t.string   "name"
+    t.string   "github"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "identifier"
+  end
+
+  create_table "participants", force: true do |t|
+    t.string   "student_number"
+    t.string   "last_name"
+    t.string   "first_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "miniproject_id"
   end
 
   create_table "projects", force: true do |t|
