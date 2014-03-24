@@ -33,6 +33,10 @@ class MiniprojectsController < ApplicationController
 
     @miniproject.generate_digest
 
+    email = params.require(:miniproject).permit(:email)
+
+    send_email(@miniproject, email)
+
     if @miniproject.save
       redirect_to miniproject_path(@miniproject.identifier), notice: 'Miniproject was successfully created.' 
     else
@@ -65,11 +69,11 @@ class MiniprojectsController < ApplicationController
 
   private
 
-    def send_email(miniproject)
+    def send_email(miniproject, email)
       subject = "[#{Course.current.acronyme}] Miniproject creater"
       msg_body = "Link to miniproject page #{request.protocol}#{request.host_with_port}/miniprojects/#{miniproject.identifier}"
       begin
-        NotificationMailer.email("mluukkai@iki.fi", submission.email, msg_body, subject).deliver unless Rails.env.development?
+        NotificationMailer.email("mluukkai@iki.fi", email, msg_body, subject).deliver unless Rails.env.development?
       rescue
       end
     end

@@ -8,6 +8,8 @@ class Miniproject < ActiveRecord::Base
             :format => { :with => /\A\z|https:\/\/github.com\/.+\/.+/,
                          :message => "copy/paste your repo address here from browser address line" }
 
+    attr_accessor :email
+
 	def generate_digest
     	self.identifier = Digest::SHA1.hexdigest "#{name}#{Time.now}"
 	end
