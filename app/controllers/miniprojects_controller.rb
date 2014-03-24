@@ -1,5 +1,5 @@
 class MiniprojectsController < ApplicationController
-  before_action :set_miniproject, only: [:show, :edit, :update, :destroy]
+  before_action :set_miniproject, only: [:show, :edit, :destroy]
   before_action :authenticate, :only => [:list, :edit, :destroy]
 
   # GET /miniprojects
@@ -43,6 +43,7 @@ class MiniprojectsController < ApplicationController
   # PATCH/PUT /miniprojects/1
   # PATCH/PUT /miniprojects/1.json
   def update
+    @miniproject = Miniproject.find_by(identifier:params[:id])
     if @miniproject.update(miniproject_params)
       redirect_to miniproject_path(@miniproject.identifier), notice: 'Github url added' 
     else
