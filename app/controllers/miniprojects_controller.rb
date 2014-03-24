@@ -33,7 +33,7 @@ class MiniprojectsController < ApplicationController
 
     @miniproject.generate_digest
 
-    email = params.require(:miniproject).permit(:email)
+    email = params.require(:miniproject).permit(:email)['email']
 
     send_email(@miniproject, email)
 
