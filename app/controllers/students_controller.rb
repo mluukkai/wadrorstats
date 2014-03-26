@@ -9,6 +9,7 @@ class StudentsController < ApplicationController
       klooni.first_name = ""
       klooni.last_name = ""
       klooni.github = ""
+      klooni.email = ""
       klooni.identifier = ""
       set << klooni
     end
