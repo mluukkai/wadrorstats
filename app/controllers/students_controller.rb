@@ -4,7 +4,15 @@ class StudentsController < ApplicationController
 
   def submissions
     submissions = Submission.where student_number:params[:id]
-    render json: submissions
+    filtered = submissions.inject([]) do |set, submission|
+      klooni = submission.clone
+      klooni.first_name = ""
+      klooni.last_name = ""
+      klooni.github = ""
+      klooni.identifier = ""
+      set << klooni
+    end
+    render json: filtered
   end  
 
   # GET /students
