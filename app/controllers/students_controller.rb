@@ -1,5 +1,11 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, :except => [:submissions]
+
+  def submissions
+    submissions = Submission.where student_number:params[:id]
+    render json: submissions
+  end  
 
   # GET /students
   # GET /students.json
