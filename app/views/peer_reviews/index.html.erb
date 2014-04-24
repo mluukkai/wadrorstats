@@ -6,7 +6,6 @@
       <th>Name</th>
       <th>Score</th>
       <th>Miniproject</th>
-      <th></th>
     </tr>
   </thead>
 
@@ -16,7 +15,6 @@
         <td><%= peer_review.name %></td>
         <td><%= peer_review.score %></td>
         <td><%= link_to peer_review.miniproject.name, miniproject_path(peer_review.miniproject.identifier) %></td>
-        <td><%= link_to 'Destroy', peer_review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
