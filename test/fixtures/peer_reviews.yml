@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  target: MyString
+  score: 1
+  miniproject_id: 1
+
+two:
+  target: MyString
+  score: 1
+  miniproject_id: 1

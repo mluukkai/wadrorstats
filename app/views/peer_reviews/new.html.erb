@@ -1,0 +1,87 @@
+<script>
+
+    function PeerReviewsController($scope, $http, $timeout) {
+        $http.get('/miniprojects.json').success( function(data, status, headers, config) {
+            $scope.projects = data;
+            console.log(data)
+        });
+
+        $scope.submit = function(project) {
+            console.log(project)
+            console.log($scope.scores)
+            data = {}
+            data.scores = $scope.scores
+            data.project = {}
+            data.project.name = project.name
+            data.project.id = project.id
+            data.authenticity_token = "<%= form_authenticity_token %>"
+            $http.post('/peer_reviews.json', data).success( function(data, satus, headers, config){
+                console.log(data)
+                $scope.scores = {};
+                $scope.project = {};
+                $scope.flash = true
+                $scope.done  = true
+                $timeout( function() {
+                    $scope.flash=false
+                    $scope.done  = false
+                }, 30000)
+            })
+
+        }
+
+
+        $scope.done=false
+        $scope.flash=false
+
+        $scope.scores = {};
+
+        $scope.nums = [1,2,3,4,5];
+
+    }
+</script>
+
+<div ng-app ng-controller="PeerReviewsController">
+
+  <div class="flash" ng-show="flash">
+    <h1>Peer reviews saved.</h1>
+  </div>
+
+  <div ng-hide="flash">
+
+    <h1>Create a peer review</h1>
+
+    <form name="myForm" novalidate ng-hide="done">
+      <div>
+
+          <label>
+            select project group
+          </label>
+      </div>
+
+      <div>
+        <select required ng-model="project" ng-options="p.name for p in projects">
+        </select
+      </div>
+
+      <p>
+
+      <div ng-show="project">
+        <label>give each participant including yourself a grade</label>
+      </div>
+
+      <div ng-repeat="p in project.participants" style="margin-bottom: 10px">
+
+        <select required ng-model="scores[p.first_name+' '+p.last_name]" ng-options="n for n in nums">
+        </select>
+        {{p.first_name+" "+p.last_name}}
+
+      </div>
+
+
+      <div>
+        <button ng-disabled="myForm.$invalid" ng-click="submit(project)">submit</button>
+      </div>
+    </form>
+  </div>
+
+</div>

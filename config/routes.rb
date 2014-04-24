@@ -1,4 +1,6 @@
 Wadrorstats::Application.routes.draw do
+  resources :peer_reviews
+
   resources :miniprojects do
     collection do
       get 'list'
