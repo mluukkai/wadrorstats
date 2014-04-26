@@ -5,7 +5,7 @@ class PeerReviewsController < ApplicationController
   # GET /peer_reviews
   # GET /peer_reviews.json
   def index
-    @peer_reviews = PeerReview.all.sort_by(&:miniproject_id)
+    @peer_reviews = PeerReview.all(:order => 'miniproject_id, name')
   end
 
   # GET /peer_reviews/1
