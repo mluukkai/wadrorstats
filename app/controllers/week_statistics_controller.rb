@@ -28,7 +28,7 @@ class WeekStatisticsController < ApplicationController
 
     respond_to do |format|
       if @week_statistic.save
-        format.html { redirect_to @week_statistic, notice: 'Week statistic was successfully created.' }
+        format.html { redirect_to @week_statistic }
         format.json { render action: 'show', status: :created, location: @week_statistic }
       else
         format.html { render action: 'new' }
