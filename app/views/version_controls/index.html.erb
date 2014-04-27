@@ -1,0 +1,39 @@
+<h1>Listing version_controls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student number</th>
+      <th>Last name</th>
+      <th>First name</th>
+      <th>Email</th>
+      <th>Course</th>
+      <th>Student</th>
+      <th>Done</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @version_controls.each do |version_control| %>
+      <tr>
+        <td><%= version_control.student_number %></td>
+        <td><%= version_control.last_name %></td>
+        <td><%= version_control.first_name %></td>
+        <td><%= version_control.email %></td>
+        <td><%= version_control.course_id %></td>
+        <td><%= version_control.student_id %></td>
+        <td><%= version_control.done %></td>
+        <td><%= link_to 'Show', version_control %></td>
+        <td><%= link_to 'Edit', edit_version_control_path(version_control) %></td>
+        <td><%= link_to 'Destroy', version_control, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Version control', new_version_control_path %>

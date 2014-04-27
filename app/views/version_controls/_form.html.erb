@@ -1,0 +1,33 @@
+<%= form_for(@version_control) do |f| %>
+  <% if @version_control.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@version_control.errors.count, "error") %> prohibited this version_control from being saved:</h2>
+
+      <ul>
+      <% @version_control.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :student_number %><br>
+    <%= f.text_field :student_number %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Olen tehnyt kaikki versionhallintaan liittyvät tehtävät' %><br>
+    <%= f.check_box :done %>
+  </div>
+  <div class="actions">
+    <%= f.submit "click me" %>
+  </div>
+<% end %>

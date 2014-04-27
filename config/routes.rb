@@ -1,4 +1,6 @@
 Wadrorstats::Application.routes.draw do
+  resources :version_controls
+
   resources :peer_reviews
 
   resources :miniprojects do
@@ -36,6 +38,8 @@ Wadrorstats::Application.routes.draw do
   get 'api/week_stats', to:'api#week_stats'
 
   get 'courses/api/week_stats', to:'api#week_stats'
+
+  get 'versionhallinta', to:'version_controls#new'
 
   root 'courses#current'
 
