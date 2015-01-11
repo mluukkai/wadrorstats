@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :submissions]
+  before_action :set_course, only: [:week_statistics, :show, :edit, :update, :destroy, :submissions]
   before_filter :authenticate, :except => [:show, :current, :submissions]
 
   def current
@@ -12,8 +12,11 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
-  def submissions
+  def week_statistics
+    @week_statistic = WeekStatistic.new course_id: @course.id, week: @course.current_week
+  end
 
+  def submissions
   end
 
   def show

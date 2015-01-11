@@ -25,23 +25,37 @@ class Course < ActiveRecord::Base
     "#{name} #{term}"
   end
 
+  def stats_for_weeks
+    return 0 if week_statistics.nil? or week_statistics.empty?
+    week_statistics.map(&:week).min
+  end
+
   def week1
     weeks[0]
   end
+
   def week2
     weeks[1]
   end
+
   def week3
     weeks[2]
   end
+
   def week4
     weeks[3]
   end
+
   def week5
     weeks[4]
   end
+
   def week6
     weeks[5]
+  end
+
+  def week7
+    weeks[6]
   end
 
   def exercises_at_week(week)
@@ -49,13 +63,13 @@ class Course < ActiveRecord::Base
   end
 
   def exercises_max
-    (1..6).map{ |w| exercises_at_week(w) }.sort.last
+    (1..7).map{ |w| exercises_at_week(w) }.sort.last
   end
 
   private
 
     def init
-      self.weeks ||= [0,0,0,0,0,0]
+      self.weeks ||= [0,0,0,0,0,0,0]
       self.current_week ||= 1
     end
 end

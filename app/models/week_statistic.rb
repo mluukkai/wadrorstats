@@ -48,6 +48,8 @@ class WeekStatistic < ActiveRecord::Base
   private
 
     def init
+      self.times ||= []
+      self.exercises ||= []
       self.submissions ||= 0
       self.completed_exercises ||= 0
       self.used_time ||= 0

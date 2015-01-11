@@ -7,7 +7,7 @@ Wadrorstats::Application.routes.draw do
     collection do
       get 'list'
     end
-   end  
+   end
 
   resources :projects
 
@@ -22,6 +22,7 @@ Wadrorstats::Application.routes.draw do
   resources :courses do
     member do
       get 'submissions'
+      get 'week_statistics'
     end
   end
 
@@ -30,8 +31,8 @@ Wadrorstats::Application.routes.draw do
   resources :submissions do
     collection do
       get 'public'
-    end  
-  end 
+    end
+  end
 
   post '/participants', to:'participants#create'
 

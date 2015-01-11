@@ -1,0 +1,27 @@
+<%= @course %>
+
+<h2>week statistics</h2>
+
+<ul>
+<% @course.week_statistics.each do |ws| %>
+  <li><%= ws.inspect %></li>
+<% end %>
+</ul>
+
+<% if @course.stats_for_weeks<@week_statistic.week %>
+
+  <h2>initialize week statistics for week <%= @course.current_week %> </h2>
+
+  <%= form_for(@week_statistic) do |f| %>
+    <div class="field">
+      <%= f.hidden_field :course_id %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :week %>
+    </div>
+    <div class="actions">
+      <%= f.submit "create" %>
+    </div>
+  <% end %>
+
+<% end %>
