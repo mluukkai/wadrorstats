@@ -8,7 +8,7 @@
       <th>First name</th>
       <th>Subnro</th>
       <th>Submissions</th>
-      <% (1..6).each do |week| %>
+      <% (1..7).each do |week| %>
           <td> <%= week %> </td>
       <% end %>
       <th>Total</th>
@@ -23,7 +23,7 @@
         <td><%= student.first_name %></td>
         <td><%= student.submissions.size %></td>
         <td><%= student.submissions.map(&:week).sort %></td>
-        <% (1..6).each do |week| %>
+        <% (1..7).each do |week| %>
             <td> <%= student.total_at_week(week) %> </td>
         <% end %>
         <td><%= student.total %></td>
