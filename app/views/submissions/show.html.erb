@@ -57,6 +57,8 @@
     <%= link_to 'Edit this submission', edit_submission_path(@submission.identifier) %>
 <% end %>
 
+<%= link_to 'delete this submission', submission_path(@submission.identifier), method: :delete, data: { confirm: 'Are you sure?' } %>
+
 <br>
 
 <%= link_to 'Back to home', root_path %>

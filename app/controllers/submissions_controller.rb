@@ -55,7 +55,7 @@ class SubmissionsController < ApplicationController
 
   def destroy
     @submission.destroy
-    redirect_to submissions_url, root_path
+    redirect_to submissions_url
   end
 
   private

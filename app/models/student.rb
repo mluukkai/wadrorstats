@@ -20,7 +20,7 @@ class Student < ActiveRecord::Base
   end
 
   def total
-    (1..6).inject(0){ |sum, n| sum+total_at_week(n) }
+    (1..7).inject(0){ |sum, n| sum+total_at_week(n) }
   end
 
   private
