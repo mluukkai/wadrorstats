@@ -8,6 +8,7 @@ one:
   course_id: 1
   student_id: 1
   github: MyString
+  key: '5cfb1854-867b-4b15-9d18-f43f0b17cc11'
 
 two:
   student_number: MyString
@@ -17,3 +18,4 @@ two:
   course_id: 1
   student_id: 1
   github: MyString
+  key: '0686d992-b364-4624-ab44-b37b323011dd'

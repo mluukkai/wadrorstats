@@ -13,4 +13,12 @@ class Project < ActiveRecord::Base
   validates :student_number,
             :format => { :with => /\A0\d{8}\z/,
                          :message => "should start with 0 and be followed by 8 digits" }
+
+
+  before_create :generate_and_set_key
+
+  private
+  def generate_and_set_key
+    self.key = SecureRandom.uuid
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427113247) do
+ActiveRecord::Schema.define(version: 20150314213647) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -63,7 +63,10 @@ ActiveRecord::Schema.define(version: 20140427113247) do
     t.string   "github"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key",            null: false
   end
+
+  add_index "projects", ["key"], name: "index_projects_on_key", unique: true
 
   create_table "students", force: true do |t|
     t.string   "student_number"
