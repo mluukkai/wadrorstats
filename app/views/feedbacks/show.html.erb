@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @feedback.content %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @feedback.course.name %>
+</p>
+
+<%= link_to 'Back to home', root_path %>
