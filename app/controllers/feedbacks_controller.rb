@@ -1,6 +1,6 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate, :except => [:new, :update, :create, :show]
+  before_filter :authenticate, :except => [:new, :update, :create]
 
   # GET /feedbacks
   # GET /feedbacks.json
@@ -29,7 +29,7 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new(feedback_params)
     @feedback.course = Course.current
     if @feedback.save
-      redirect_to feedback_path(@feedback), notice: 'Feedback was successfully created.'
+      redirect_to :root, notice: 'Feedback was successfully created.'
     else
       render action: 'new'
     end
