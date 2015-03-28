@@ -1,6 +1,6 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate, :except => [:new, :update, :create]
+  before_filter :authenticate, :except => [:new, :update, :create, :send_email]
 
   # GET /feedbacks
   # GET /feedbacks.json
@@ -29,6 +29,7 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new(feedback_params)
     @feedback.course = Course.current
     if @feedback.save
+      send_email(@feedback)
       redirect_to :root, notice: 'Feedback was successfully created.'
     else
       render action: 'new'
@@ -46,6 +47,15 @@ class FeedbacksController < ApplicationController
         format.html { render action: 'edit' }
         format.json { render json: @feedback.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def send_email(feedback)
+    subject = "[#{Course.current.acronyme}] Anonymous feedback"
+    msg_body = "Link to feedback #{request.protocol}#{request.host_with_port}/feedbacks/#{feedback.id}"
+    begin
+      NotificationMailer.email("mluukkai@iki.fi", submission.email, msg_body, subject).deliver unless Rails.env.development?
+    rescue
     end
   end
 
