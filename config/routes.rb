@@ -1,4 +1,6 @@
 Wadrorstats::Application.routes.draw do
+  resources :feedbacks
+
   resources :version_controls
 
   resources :peer_reviews
@@ -23,6 +25,7 @@ Wadrorstats::Application.routes.draw do
     member do
       get 'submissions'
       get 'week_statistics'
+      get 'feedbacks'
     end
   end
 

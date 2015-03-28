@@ -1,0 +1,8 @@
+<h1> Anonymous feedbacks for course <%=@course.name %></h1>
+<ul>
+<% @feedbacks.each do |f| %>
+    <li><%= f.content %></li>
+<% end %>
+</ul>
+
+<%= link_to 'Back to home', root_path %>

@@ -2,6 +2,7 @@ class Course < ActiveRecord::Base
   after_initialize :init
   has_many :submissions
   has_many :week_statistics
+  has_many :feedbacks
 
   serialize :weeks
 
