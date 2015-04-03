@@ -54,7 +54,7 @@ class FeedbacksController < ApplicationController
     subject = "[#{Course.current.acronyme}] Anonymous feedback"
     msg_body = "Link to feedback #{request.protocol}#{request.host_with_port}/feedbacks/#{feedback.id}"
     begin
-      NotificationMailer.email("mluukkai@iki.fi", submission.email, msg_body, subject).deliver unless Rails.env.development?
+      NotificationMailer.email("mluukkai@iki.fi", "mluukkai@iki.fi", msg_body, subject).deliver unless Rails.env.development?
     rescue
     end
   end
