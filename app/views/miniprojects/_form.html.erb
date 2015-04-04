@@ -1,3 +1,4 @@
+
 <%= form_for(@miniproject) do |f| %>
   <% if @miniproject.errors.any? %>
     <div id="error_explanation">
@@ -19,6 +20,15 @@
   <div class="field">
     <%= f.label 'your email' %><br>
     <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Github link' %><br>
+    <%= f.text_field :github %>
+  </div>
+
+  <div class="identifier">
+    <%= f.hidden_field(:id, value:@miniproject.identifier) %>
   </div>
 
   <div class="actions">

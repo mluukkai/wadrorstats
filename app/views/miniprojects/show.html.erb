@@ -49,6 +49,9 @@
   <%= @miniproject.name %>
 </h2>
 
+<%= link_to 'Edit', edit_miniproject_path(@miniproject.identifier) %>
+<br>
+
 <% if @miniproject.github.nil? or @miniproject.errors.any? %>
   <h4>Add the github url</h4>
 	<%= form_for(@miniproject) do |f| %>

@@ -1,6 +1,6 @@
 class MiniprojectsController < ApplicationController
   before_action :set_miniproject, only: [:show, :edit, :destroy]
-  before_action :authenticate, :only => [:list, :edit, :destroy]
+  before_action :authenticate, :only => [:list, :destroy]
 
   # GET /miniprojects
   # GET /miniprojects.json
@@ -47,10 +47,9 @@ class MiniprojectsController < ApplicationController
   # PATCH/PUT /miniprojects/1
   # PATCH/PUT /miniprojects/1.json
   def update
-    id = params.require(:miniproject).permit(:id)[:id]
-    @miniproject = Miniproject.find_by(identifier:id)
+    @miniproject = Miniproject.find_by(identifier:params[:id])
     if @miniproject.update(miniproject_params)
-      redirect_to miniproject_path(@miniproject.identifier), notice: 'Github url added' 
+      redirect_to miniproject_path(@miniproject.identifier), notice: 'Miniproject updated' 
     else
       #byebug
       render action: 'show' 
@@ -85,6 +84,6 @@ class MiniprojectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def miniproject_params
-      params.require(:miniproject).permit(:name, :github, :course_id)
+      params.require(:miniproject).permit(:name, :github, :course_id, :email)
     end
 end
