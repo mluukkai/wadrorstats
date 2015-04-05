@@ -1,4 +1,8 @@
 Wadrorstats::Application.routes.draw do
+  resources :questions
+
+  resources :questionnaires
+
   resources :feedbacks
 
   resources :version_controls
