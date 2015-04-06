@@ -11,10 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+  <% @questionnaire.questions.each do |question| %>
+    <h3><%= question.description%></h3><br>
+    <%= f.fields_for :questions, question do |q| -%>
+      <% if question.type == "Free_question" %>
+        <%= q.text_area :answer, :size=>"50x5", :style=>"padding:5px;"%> <br>
+      <% else %>
+        <%= q.select(:answer, options_for_select([question.option1, question.option2, question.option3, question.option4, question.option5])) %>
+      <% end %>
+    <% end -%>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,7 +1,11 @@
 Wadrorstats::Application.routes.draw do
   resources :questions
 
-  resources :questionnaires
+  resources :questionnaires do 
+    member do 
+      get 'copy'
+    end
+  end
 
   resources :feedbacks
 

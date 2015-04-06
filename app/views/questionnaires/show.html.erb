@@ -1,9 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @questionnaire.name %>
-</p>
+</h1>
+
+<%= link_to 'Copy me', copy_questionnaire_path(@questionnaire) %>
 
 <%= link_to 'Edit', edit_questionnaire_path(@questionnaire) %> |
 <%= link_to 'Back', questionnaires_path %>

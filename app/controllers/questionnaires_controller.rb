@@ -25,13 +25,39 @@ class QuestionnairesController < ApplicationController
         @uusi = Multichoice_question.new
       end
       @uusi.description = q.description
-      puts "taalla"
-      puts @questionnaire.id
       @uusi.questionnaire_id = @questionnaire.id
       @uusi.save!
       @questionnaire.questions.push(@uusi)
     end
     @questionnaire.save!
+  end
+
+  def copy
+    @questionnaire = Questionnaire.find(params[:id])
+    @new = Questionnaire.new
+    @new.id = Questionnaire.maximum(:id) + 1
+    @questionnaire.questions.each do |q|
+      @uusi = copy_question(q)
+      @new.questions.push(@uusi)
+    end
+    @new.name = @questionnaire.name
+    @new.save!
+    redirect_to edit_questionnaire_path(@new)
+  end
+
+  def copy_question(q)
+    if q.type == "Free_question"
+        @uusi = Free_question.new
+    elsif q.type == "Multichoice_question"
+        @uusi = Multichoice_question.new
+        @uusi.option1 = q.option1
+        @uusi.option2 = q.option2
+        @uusi.option3 = q.option3
+    end
+    @uusi.description = q.description
+    @uusi.questionnaire_id = @new.id
+    @uusi.save!
+    return @uusi
   end
 
   # GET /questionnaires/1/edit
@@ -86,6 +112,6 @@ class QuestionnairesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def questionnaire_params
-      params.require(:questionnaire).permit(:name)
+      params.require(:questionnaire).permit(:name, :questions_attributes => [:id, :answer])
     end
 end
