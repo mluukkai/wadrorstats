@@ -34,7 +34,7 @@ class QuestionnairesController < ApplicationController
       @new.questions.push(@uusi)
     end
     @new.name = @questionnaire.name
-    @new.generate_digest
+    #@new.generate_digest
     @new.save!
     redirect_to edit_questionnaire_path(@new)
   end
@@ -44,9 +44,7 @@ class QuestionnairesController < ApplicationController
         @uusi = Free_question.new
     elsif q.type == "Multichoice_question"
         @uusi = Multichoice_question.new
-        @uusi.option1 = q.option1
-        @uusi.option2 = q.option2
-        @uusi.option3 = q.option3
+        @uusi = copy_options(q)
     end
     @uusi.description = q.description
     @uusi.questionnaire_id = @new.id
@@ -54,6 +52,15 @@ class QuestionnairesController < ApplicationController
     return @uusi
   end
 
+  def copy_options(q)
+    @uusi.option1 = q.option1
+    @uusi.option2 = q.option2
+    @uusi.option3 = q.option3
+    @uusi.option4 = q.option4
+    @uusi.option5 = q.option5
+    @uusi.save!
+    return @uusi
+  end
   # GET /questionnaires/1/edit
   def edit
   end
