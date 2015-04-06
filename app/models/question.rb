@@ -9,4 +9,8 @@ class Question < ActiveRecord::Base
     def self.types
       %w(Free_question Multichoice_question)
     end
+
+    def generate_digest
+    	self.identifier = Digest::SHA1.hexdigest "#{description}#{Time.now}"
+	end
 end

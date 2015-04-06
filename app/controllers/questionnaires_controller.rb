@@ -19,14 +19,7 @@ class QuestionnairesController < ApplicationController
     @questionnaire.id = Questionnaire.maximum(:id) + 1
     @alkup = Questionnaire.find(1)
     @alkup.questions.each do |q|
-      if q.type == "Free_question"
-        @uusi = Free_question.new
-      elsif q.type == "Multichoice_question"
-        @uusi = Multichoice_question.new
-      end
-      @uusi.description = q.description
-      @uusi.questionnaire_id = @questionnaire.id
-      @uusi.save!
+      @uusi = copy_question(q)
       @questionnaire.questions.push(@uusi)
     end
     @questionnaire.save!
@@ -41,6 +34,7 @@ class QuestionnairesController < ApplicationController
       @new.questions.push(@uusi)
     end
     @new.name = @questionnaire.name
+    @new.generate_digest
     @new.save!
     redirect_to edit_questionnaire_path(@new)
   end
