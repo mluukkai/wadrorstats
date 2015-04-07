@@ -34,9 +34,9 @@ class QuestionnairesController < ApplicationController
       @new.questions.push(@uusi)
     end
     @new.name = @questionnaire.name
-    #@new.generate_digest
+    @new.generate_digest
     @new.save!
-    redirect_to edit_questionnaire_path(@new)
+    redirect_to edit_questionnaire_path(@new.identifier)
   end
 
   def copy_question(q)
@@ -108,7 +108,7 @@ class QuestionnairesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:id])
+      @questionnaire = Questionnaire.find_by(identifier:params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
