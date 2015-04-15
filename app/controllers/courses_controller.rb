@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:week_statistics, :show, :edit, :update, :destroy, :submissions]
-  before_filter :authenticate, :except => [:show, :current, :submission]
+  before_filter :authenticate, :except => [:show, :current, :submissions]
 
   def current
     redirect_to Course.current
