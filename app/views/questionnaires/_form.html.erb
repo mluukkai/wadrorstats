@@ -22,6 +22,10 @@
     <% end -%>
   <% end %>
 
+  <div class="identifier">
+    <%= f.hidden_field(:identifier, value:@questionnaire.identifier) %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

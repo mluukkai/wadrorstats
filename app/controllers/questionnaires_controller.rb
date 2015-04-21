@@ -84,14 +84,12 @@ class QuestionnairesController < ApplicationController
   # PATCH/PUT /questionnaires/1
   # PATCH/PUT /questionnaires/1.json
   def update
-    respond_to do |format|
-      if @questionnaire.update(questionnaire_params)
-        format.html { redirect_to @questionnaire, notice: 'Questionnaire was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
-      end
+    @questionnaire = Questionnaire.find_by(identifier:params[:identifier])
+    if @questionnaire.update(questionnaire_params)
+      redirect_to questionnaire_path(@questionnaire), notice: 'Questionnaire updated' 
+    else
+      #byebug
+      render action: 'show' 
     end
   end
 
@@ -108,7 +106,7 @@ class QuestionnairesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_questionnaire
-      @questionnaire = Questionnaire.find_by(identifier:params[:id])
+      @questionnaire = Questionnaire.find_by(identifier:params[:identifier])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
