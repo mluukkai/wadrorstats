@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
 	belongs_to :questionnaire
+    belongs_to :questionnaire_answer
     self.inheritance_column = :type 
     scope :free_questions, -> { where(type: 'Free_question') } 
 	scope :multichoice_questions, -> { where(type: 'Multichoice_question') } 

@@ -1,0 +1,29 @@
+<h1>Listing questionnaire_answers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Identifier</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questionnaire_answers.each do |questionnaire_answer| %>
+      <tr>
+        <td><%= questionnaire_answer.name %></td>
+        <td><%= questionnaire_answer.identifier %></td>
+        <td><%= link_to 'Show', questionnaire_answer %></td>
+        <td><%= link_to 'Edit', edit_questionnaire_answer_path(questionnaire_answer) %></td>
+        <td><%= link_to 'Destroy', questionnaire_answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Questionnaire answer', new_questionnaire_answer_path %>

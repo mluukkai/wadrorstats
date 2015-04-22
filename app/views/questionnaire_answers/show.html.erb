@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @questionnaire_answer.name %>
+</p>
+
+<p>
+  <strong>Identifier:</strong>
+  <%= @questionnaire_answer.identifier %>
+</p>
+
+<%= @questionnaire_answer.questions.size %>
+
+<%= link_to 'Edit', edit_questionnaire_answer_path(@questionnaire_answer) %> |
+<%= link_to 'Back', questionnaire_answers_path %>

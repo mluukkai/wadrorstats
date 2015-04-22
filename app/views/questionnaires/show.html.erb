@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1>
-  <%= @questionnaire.name %>
+  <%= @questionnaire_answer.name %>
 </h1>
 
-<%= link_to 'Copy me', copy_questionnaire_path(@questionnaire) %>
+<% @questionnaire_answer.questions.each do |q| %>
+	<%= q.description %>
+<% end %>
 
-<%= link_to 'Edit', edit_questionnaire_path(@questionnaire) %> |
-<%= link_to 'Back', questionnaires_path %>

@@ -27,16 +27,19 @@ class QuestionnairesController < ApplicationController
 
   def copy
     @questionnaire = Questionnaire.find(params[:id])
-    @new = Questionnaire.new
-    @new.id = Questionnaire.maximum(:id) + 1
+    puts params[:id]
+    @new = QuestionnaireAnswer.new
+    @new.id = QuestionnaireAnswer.maximum(:id) + 1
     @questionnaire.questions.each do |q|
       @uusi = copy_question(q)
       @new.questions.push(@uusi)
+      @uusi.questionnaire_answer_id = @new.id
     end
     @new.name = @questionnaire.name
     @new.generate_digest
     @new.save!
-    redirect_to edit_questionnaire_path(@new.identifier)
+    puts @new.identifier
+    redirect_to edit_questionnaire_answer_path(@new.identifier)
   end
 
   def copy_question(q)
@@ -47,7 +50,7 @@ class QuestionnairesController < ApplicationController
         @uusi = copy_options(q)
     end
     @uusi.description = q.description
-    @uusi.questionnaire_id = @new.id
+    @uusi.questionnaire_answer_id = @new.id
     @uusi.save!
     return @uusi
   end
@@ -84,7 +87,7 @@ class QuestionnairesController < ApplicationController
   # PATCH/PUT /questionnaires/1
   # PATCH/PUT /questionnaires/1.json
   def update
-    @questionnaire = Questionnaire.find_by(identifier:params[:identifier])
+    @questionnaire = Questionnaire.find_by(identifier:params[:id])
     if @questionnaire.update(questionnaire_params)
       redirect_to questionnaire_path(@questionnaire), notice: 'Questionnaire updated' 
     else
@@ -106,7 +109,7 @@ class QuestionnairesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_questionnaire
-      @questionnaire = Questionnaire.find_by(identifier:params[:identifier])
+      @questionnaire = Questionnaire.find_by(identifier:params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

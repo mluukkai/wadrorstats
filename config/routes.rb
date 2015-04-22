@@ -1,4 +1,6 @@
 Wadrorstats::Application.routes.draw do
+  resources :questionnaire_answers
+
   resources :questions
 
   resources :questionnaires do 
