@@ -30,7 +30,6 @@ class Student < ActiveRecord::Base
   end
 
   def non_vc_total
-    byebug
     non_vc(1) + non_vc(2) + non_vc(3) + non_vc(4) + non_vc(5) + non_vc(6) + non_vc(7)
   end
 
