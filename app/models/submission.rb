@@ -47,6 +47,14 @@ class Submission < ActiveRecord::Base
     self.identifier = Digest::SHA1.hexdigest "#{email}#{Time.now}"
   end
 
+  def vc_ok
+    self.student.vc(week)
+  end
+
+  def a(n)
+    self.send("a#{n}".to_sym)
+  end
+
   def assignment(n)
     self.send("a#{n}".to_sym)
   end

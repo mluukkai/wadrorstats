@@ -23,6 +23,27 @@ class Student < ActiveRecord::Base
     (1..7).inject(0){ |sum, n| sum+total_at_week(n) }
   end
 
+  def vc(week)
+    sub = submissions.find_by(week:week)
+    return 0 if sub.nil?
+
+    vcs = {
+      1 => [1,2,3,4,11],
+      2 => [4,5,6,7],
+      3 => [],
+      4 => [4,5,6],
+      5 => [4,5,6,7,8],
+      6 => [],
+      7 => []
+    }
+
+    vcs[week].each do |vc|
+      return 0 unless sub.a(vc)
+    end
+
+    1
+  end
+
   private
 
   def init

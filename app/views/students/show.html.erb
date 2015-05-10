@@ -9,8 +9,11 @@
 <ul>
   <% @student.submissions.each do |submission| %>
     <li>
-      week <%= link_to submission.week, submission_path(submission.identifier) %>
-      marked <%= submission.total %> , id: <%= submission.id %>
+      week <%= link_to submission.week,
+      submission_path(submission.identifier) %>
+      marked <%= submission.total %>,
+      id: <%= submission.id %>,
+      vc: <%= submission.vc_ok %>
     </li>
   <% end %>
 </ul>

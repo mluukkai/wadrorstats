@@ -12,6 +12,9 @@
           <td> <%= week %> </td>
       <% end %>
       <th>Total</th>
+      <% (1..7).each do |week| %>
+          <td> vc<%= week %> </td>
+      <% end %>
     </tr>
   </thead>
 
@@ -27,6 +30,9 @@
             <td> <%= student.total_at_week(week) %> </td>
         <% end %>
         <td><%= student.total %></td>
+        <% (1..7).each do |week| %>
+            <td> <%= student.vc(week) %> </td>
+        <% end %>
         <td>
           <strong>
             <%= "DUPLICATE" if student.submissions.map(&:week).sort!=student.submissions.map(&:week).uniq.sort %>
