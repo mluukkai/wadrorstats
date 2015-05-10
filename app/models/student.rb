@@ -25,7 +25,6 @@ class Student < ActiveRecord::Base
 
   def vc(week)
     sub = submissions.find_by(week:week)
-    return 0 if sub.nil?
 
     vcs = {
       1 => [1,2,3,4,11],
@@ -36,6 +35,8 @@ class Student < ActiveRecord::Base
       6 => [],
       7 => []
     }
+
+    return 0 if sub.nil? and vcs[week].any?
 
     vcs[week].each do |vc|
       return 0 unless sub.a(vc)
