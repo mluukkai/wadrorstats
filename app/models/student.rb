@@ -24,9 +24,36 @@ class Student < ActiveRecord::Base
   end
 
   def vc_all
-    vc_sum = vc(1)+vc(2)+vc(3)+vc(4)+vc(5)+vc(6)+vc(7)
+    vc_sum = vc(1) + vc(2) + vc(3) + vc(4) + vc(5) + vc(6) + vc(7)
     return "1" if vc_sum == 7
     ""
+  end
+
+  def non_vc_total
+    byebug
+    non_vc(1) + non_vc(2) + non_vc(3) + non_vc(4) + non_vc(5) + non_vc(6) + non_vc(7)
+  end
+
+  def non_vc(week)
+    sub = submissions.find_by(week:week)
+
+    vcs = {
+      1 => [1,2,3,4,11],
+      2 => [4,5,6,7],
+      3 => [],
+      4 => [4,5,6],
+      5 => [4,5,6,7,8],
+      6 => [],
+      7 => []
+    }
+
+    return 0 if sub.nil?
+
+    vc_total = vcs[week].inject(0) do |sum, vc|
+      sum + (sub.a(vc) ? 1 : 0 )
+    end
+
+    sub.total - vc_total
   end
 
   def vc(week)

@@ -16,6 +16,7 @@
           <th> vc<%= week %> </th>
       <% end %>
       <th>VC</th>
+      <th>non_wc_total</th>
     </tr>
   </thead>
 
@@ -35,6 +36,7 @@
             <td> <%= student.vc(week) %> </td>
         <% end %>
         <td><%= student.vc_all %></td>
+        <td><%= student.non_vc_total %></td>
         <td>
           <strong>
             <%= "DUPLICATE" if student.submissions.map(&:week).sort!=student.submissions.map(&:week).uniq.sort %>
