@@ -25,7 +25,8 @@ class Student < ActiveRecord::Base
 
   def vc_all
     vc_sum = vc(1)+vc(2)+vc(3)+vc(4)+vc(5)+vc(6)+vc(7)
-    vc_sum == 7
+    return "1" if vc_sum == 7
+    ""
   end
 
   def vc(week)
