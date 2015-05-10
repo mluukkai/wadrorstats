@@ -9,12 +9,13 @@
       <th>Subnro</th>
       <th>Submissions</th>
       <% (1..7).each do |week| %>
-          <td> <%= week %> </td>
+          <th> <%= week %> </th>
       <% end %>
       <th>Total</th>
       <% (1..7).each do |week| %>
-          <td> vc<%= week %> </td>
+          <th> vc<%= week %> </th>
       <% end %>
+      <th>VC</th>
     </tr>
   </thead>
 
@@ -33,6 +34,7 @@
         <% (1..7).each do |week| %>
             <td> <%= student.vc(week) %> </td>
         <% end %>
+        <td><%= student.vc_all %></td>
         <td>
           <strong>
             <%= "DUPLICATE" if student.submissions.map(&:week).sort!=student.submissions.map(&:week).uniq.sort %>
