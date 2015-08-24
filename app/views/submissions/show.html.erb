@@ -23,6 +23,16 @@
   <%= link_to "#{request.protocol}#{request.host_with_port}/submissions/"+@submission.identifier, submission_path(@submission.identifier) %>
 </p>
 
+<% if @submission.course.challenging %>
+  <p>
+    <% if @submission.challenging %>
+      <strong>haastavat tehtävät</strong>
+    <% else %>
+      <strong>normaalit tehtävät</strong>
+    <% end %>
+  </p>
+<% end %>
+
 <p>
   <strong> <%= @submission.total%> exercises marked:</strong>
 </p>

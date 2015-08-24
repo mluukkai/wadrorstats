@@ -8,6 +8,9 @@
       <th>First name</th>
       <th>Email</th>
       <th>Week</th>
+      <% if @course.challenging %>
+        <th>Challenging</th>
+      <% end %>
       <th>Hours</th>
       <% (1..@course.exercises_max).each do |e| %>
         <th><%=e%></th>
@@ -28,6 +31,9 @@
         <td><%= submission.first_name %></td>
         <td><%= submission.email %></td>
         <td><%= submission.week %></td>
+        <% if @course.challenging %>
+          <td><%= c(submission.challenging) %></td>
+        <% end %>
         <td><%= submission.hours %></td>
         <% (1..@course.exercises_max).each do |e| %>
             <td><%= t(submission.assignment(e)) %></td>

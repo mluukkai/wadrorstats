@@ -66,7 +66,7 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      allowed = :student_number, :last_name, :first_name, :week, :hours, :comments, :email, :github
+      allowed = :student_number, :last_name, :first_name, :week, :hours, :comments, :email, :github, :challenging
       (1..Course.current.exercises_max).each do |i|
         allowed << "a#{i}".to_s
       end

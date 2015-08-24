@@ -36,6 +36,10 @@
     <%= f.text_field :current_week %>
   </div>
   <div class="field">
+    <%= f.label :challenging %><br>
+    <%= f.check_box :challenging %>
+  </div>
+  <div class="field">
     <%= f.label :week1 %><br>
     <%= f.number_field :week1, name: 'course[weeks][]' %>
   </div>
