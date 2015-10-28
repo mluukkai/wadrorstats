@@ -52,4 +52,6 @@ end
 # Use debugger
 gem 'byebug', group: [:development, :test]
 
+gem 'coveralls', require: false
+
 gem 'angularjs-rails'

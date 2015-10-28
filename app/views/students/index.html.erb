@@ -11,6 +11,9 @@
       <% (1..7).each do |week| %>
           <th> <%= week %> </th>
       <% end %>
+      <% (1..7).each do |week| %>
+          <th> <%= week %> </th>
+      <% end %>
       <th>Total</th>
       <% (1..7).each do |week| %>
           <th> vc<%= week %> </th>
@@ -30,6 +33,9 @@
         <td><%= student.submissions.map(&:week).sort %></td>
         <% (1..7).each do |week| %>
             <td> <%= student.total_at_week(week) %> </td>
+        <% end %>
+        <% (1..7).each do |week| %>
+            <td> <%= student.challenging_at_week(week) %> </td>
         <% end %>
         <td><%= student.total %></td>
         <% (1..7).each do |week| %>

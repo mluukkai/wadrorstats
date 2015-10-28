@@ -19,6 +19,12 @@ class Student < ActiveRecord::Base
     s.total
   end
 
+  def challenging_at_week(w)
+    s = submissions.where(week:w).first
+    return 1 if s and s.challenging?
+    ""
+  end
+
   def total
     (1..7).inject(0){ |sum, n| sum+total_at_week(n) }
   end
