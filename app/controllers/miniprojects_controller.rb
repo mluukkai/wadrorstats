@@ -5,7 +5,7 @@ class MiniprojectsController < ApplicationController
   # GET /miniprojects
   # GET /miniprojects.json
   def index
-    @miniprojects = Miniproject.all
+    @miniprojects = Miniproject.all.shuffle
   end
 
   def list
@@ -38,9 +38,9 @@ class MiniprojectsController < ApplicationController
     send_email(@miniproject, email)
 
     if @miniproject.save
-      redirect_to miniproject_path(@miniproject.identifier), notice: 'Miniproject was successfully created.' 
+      redirect_to miniproject_path(@miniproject.identifier), notice: 'Miniproject was successfully created.'
     else
-      render action: 'new' 
+      render action: 'new'
     end
   end
 
@@ -49,10 +49,10 @@ class MiniprojectsController < ApplicationController
   def update
     @miniproject = Miniproject.find_by(identifier:params[:id])
     if @miniproject.update(miniproject_params)
-      redirect_to miniproject_path(@miniproject.identifier), notice: 'Miniproject updated' 
+      redirect_to miniproject_path(@miniproject.identifier), notice: 'Miniproject updated'
     else
       #byebug
-      render action: 'show' 
+      render action: 'show'
     end
   end
 
