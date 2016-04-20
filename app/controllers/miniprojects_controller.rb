@@ -48,10 +48,8 @@ class MiniprojectsController < ApplicationController
   # PATCH/PUT /miniprojects/1.json
   def update
     puts "------------------------"
-    puts miniproject_params[:id].inspect
-    puts miniproject_params.inspect
-    puts params.inspect
-    @miniproject = Miniproject.find_by(identifier:miniproject_params[:id])
+    puts params[:id][1..-1]
+    @miniproject = Miniproject.find_by(identifier:miniproject_params[:id][1..-1])
     if @miniproject.update(miniproject_params)
       redirect_to miniproject_path(@miniproject.identifier), notice: 'Miniproject updated'
     else
