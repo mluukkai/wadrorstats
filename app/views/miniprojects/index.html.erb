@@ -14,6 +14,7 @@
     <tr>
       <th>group name</th>
       <th>repositorion</th>
+      <th>customer meeting</th>
     </tr>
   </thead>
 
@@ -22,6 +23,7 @@
       <tr>
         <td><%= miniproject.name %></td>
         <td><%= link_to miniproject.github, miniproject.github %></td>
+        <td><%= miniproject.demo %></td>
       </tr>
     <% end %>
   </tbody>

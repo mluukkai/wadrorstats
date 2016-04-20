@@ -84,6 +84,6 @@ class MiniprojectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def miniproject_params
-      params.require(:miniproject).permit(:name, :github, :course_id, :email)
+      params.require(:miniproject).permit(:name, :github, :course_id, :email, :demo)
     end
 end

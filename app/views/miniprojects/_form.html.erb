@@ -27,6 +27,13 @@
     <%= f.text_field :github %>
   </div>
 
+  <% if @miniproject.persisted? %>
+    <div class="field">
+      <%= f.label 'customer meeting' %><br>
+      <%= f.text_field :demo %>
+    </div>
+  <% end %>
+
   <div class="identifier">
     <%= f.hidden_field(:id, value:@miniproject.identifier) %>
   </div>
