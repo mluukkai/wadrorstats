@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, :only => [:index]
+  before_action :authenticate, :only => [:index, :new_admin]
 
   def index
     @course = Course.current
@@ -14,6 +14,12 @@ class SubmissionsController < ApplicationController
   def show
   end
 
+  def new_admin
+    @course = Course.current
+    @submission = Submission.new course:Course.current, week:Course.current.current_week
+    @submission.prefill_fields_if_in_development
+  end
+
   def new
     @course = Course.current
     @submission = Submission.new course:Course.current, week:Course.current.current_week
@@ -23,8 +29,13 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new_with_digest(submission_params)
 
+    admin = params['submission']['admin']
+    unless admin
+      @submission.week = Course.current.current_week
+    end
+
     if @submission.save
-      send_email(@submission)
+      send_email(@submission) unless admin
       Course.current.take_into_account_in_stats(@submission)
 
       redirect_to submission_path(@submission.identifier), notice: 'Submission was successfully created.'

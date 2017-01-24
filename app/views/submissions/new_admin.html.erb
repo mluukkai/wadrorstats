@@ -1,0 +1,113 @@
+<script>
+    $( document ).ready( function(){
+        $('#toggle').click(function(e) {
+            $(".exercise input").each(function(i, s) {
+                if ( $(s).prop('type')=="checkbox" ) {
+                    $(s).prop('checked', true);
+                }
+            });
+            e.preventDefault();
+        });
+
+        var action = $('form')[0]['action'];
+        var ending = action.substring(action.length-12,action.length);
+
+        if ( ending != "/submissions") {
+            var identifier = $('.identifier input')[0]['value'];
+            var new_action = action.substring(0, action.length-1)+identifier;
+            $('form')[0]['action'] = new_action;
+        }
+
+        console.log($('form')[0]['action']);
+    });
+</script>
+
+<%= form_for(@submission) do |f| %>
+  <% if @submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+      <ul>
+      <% @submission.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :student_number %><br>
+    <%= f.text_field :student_number %>
+  </div>
+    <div class="field">
+      <%= f.label :first_name %><br>
+      <%= f.text_field :first_name %>
+    </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :week %><br>
+    <%= f.text_field :week %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'github repository:' %><br>
+    <%= f.text_field :github, size:80 %>
+  </div>
+
+  <%= f.hidden_field(:admin, value: true) %>
+
+  <div class="identifier">
+    <%= f.hidden_field(:id, value:@submission.identifier) %>
+  </div>
+
+  <% if @submission.course.challenging %>
+
+    <div class="field">
+      <%= f.label 'tein' %><br>
+      <%= f.radio_button :challenging, false, :checked => true %>
+       normaalit tehtävät<br>
+      <%= f.radio_button :challenging, true %>
+      haastavat tehtävät <br>
+    </div>
+
+  <% end %>
+
+  <%= f.label 'completed exercises (rasti jokaiseen tekemääsi tehtävään, kyse ei siis ole tehtyjen tehtävien lukumäärästä):'%>
+  <br>
+  <div style="margin-bottom: 10px;">
+
+  <% (1..@submission.course.exercises_at_week(@submission.week)).each do |e| %>
+    <span class="exercise">
+        <%= e %>
+        <label>
+          <%= f.check_box "a#{e}".to_s %>
+        </label>
+    </span>
+  <% end %>
+    <span>
+      <button id="toggle">
+        mark all
+      </button>
+    </span>
+  </div>
+
+  <div class="field">
+    <%= f.label :hours %><br>
+    <%= f.number_field :hours %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %><br>
+    <%= f.text_area :comments, size:"80x5" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -34,6 +34,7 @@ Wadrorstats::Application.routes.draw do
   resources :submissions do
     collection do
       get 'public'
+      get 'new_admin'
     end
   end
 
