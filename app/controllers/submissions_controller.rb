@@ -17,6 +17,8 @@ class SubmissionsController < ApplicationController
   def new_admin
     @course = Course.current
     @submission = Submission.new course:Course.current, week:Course.current.current_week
+    @submission.github = "https://github.com/mluukkai/WebPalvelinohjelmointi2017"
+    @submission.email = "mluukkai@iki.fi"
     @submission.prefill_fields_if_in_development
   end
 
